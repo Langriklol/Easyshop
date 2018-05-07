@@ -26,9 +26,13 @@ class Product
      */
     private $description;
 
+    /**
+     * @var string $image product image url
+     */
+    private $image;
+
     public function __construct()
     {
-
     }
     
     /**
@@ -82,6 +86,53 @@ class Product
     public function setDescription(string $description): Product
     {
         $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     * @return Product
+     */
+    public function setName(string $name): Product
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    public function toArrayHash():ArrayHash
+    {
+        return new ArrayHash([
+            'product_id' => $this->getId(),
+            'name' => $this->getName(),
+            'description' => $this->getDescription(),
+            'price' => $this->getPrice(),
+            'image' => $this->getImage()
+        ]);
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage(): string
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image product image url
+     * @return Product
+     */
+    public function setImage(string $image): Product
+    {
+        $this->image = $image;
         return $this;
     }
 }

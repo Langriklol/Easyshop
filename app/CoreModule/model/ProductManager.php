@@ -1,6 +1,7 @@
 <?php
 
 namespace App\CoreModule\Model;
+use App\CoreModule\Model\Shop\Product;
 use App\Model\BaseManager;
 use Nette\Database\Table\IRow;
 use Nette\Database\Table\ActiveRow;
@@ -9,7 +10,7 @@ use Nette\Utils\ArrayHash;
 class ProductManager extends BaseManager
 {
     const TABLE_NAME = 'product',
-        COLUMN_ID = 'product_id';
+        COLUMN_ID = 'id';
 
     /**
      * @return array|IRow[] products
@@ -29,10 +30,11 @@ class ProductManager extends BaseManager
     }
 
     /**
-     * @param $product array|ArrayHash product
+     * @param $product Product product
      */
-    public function saveProduct($product)
+    public function saveProduct(Product $product)
     {
+        $product = $product->toArrayHash();
         // How to save one DB query? Check if product have product id, then it is not new
         if(!$product[self::COLUMN_ID])
             $this->db->table(self::TABLE_NAME)->insert($product);
