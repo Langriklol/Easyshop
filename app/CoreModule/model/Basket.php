@@ -46,13 +46,20 @@ class Basket
      */
     public function addProduct(Product $product): Basket
     {
-        $this->products[$product->getId()][] = $product;
+        $this->products[] = $product;
         return $this;
     }
 
     public function removeProduct(Product $product)
     {
-        $count = count($this->products[$product->getId()]);
-        unset($this->products[$product->getId()][$count]);
+        $counter = 0;
+        foreach ($this->products as $item) {
+            if ($product == $item)
+            {
+                unset($this->products[$counter]);
+                return;
+            }
+            $counter++;
+        }
     }
 }

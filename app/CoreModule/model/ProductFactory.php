@@ -15,9 +15,10 @@ class ProductFactory
      * @param float $price product price
      * @param string $description product description
      * @param string $image product image
-     * @return Product product
+     * @param int $availability
+     * @return Product $product
      */
-    public function createProduct(int $id, string $name, float $price, string $description, string $image): Product
+    public function createProduct(int $id, string $name, float $price, string $description, string $image, int $availability = Product::AVAILABLE): Product
     {
         $product = new Product();
         $product->setId($id)

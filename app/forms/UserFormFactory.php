@@ -27,7 +27,6 @@ class UserFormFactory
      * @param Form $form
      * @param null|ArrayHash $instructions
      * @param bool $register
-     * @throws \Nette\Application\AbortException
      */
     private function login(Form $form, ArrayHash $instructions = null, bool $register = false)
     {

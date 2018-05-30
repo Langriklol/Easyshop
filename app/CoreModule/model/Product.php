@@ -6,6 +6,10 @@ use Nette\Utils\ArrayHash;
 
 class Product
 {
+    const AVAILABLE = 2,
+        WAITING = 4,
+        UNAVAILABLE = 8;
+
     /**
      * @var int $id product id
      */
@@ -30,6 +34,11 @@ class Product
      * @var string $image product image url
      */
     private $image;
+
+    /**
+     * @var int $availability Availability of product
+     */
+    private $availability;
 
     public function __construct()
     {
@@ -107,6 +116,9 @@ class Product
         return $this;
     }
 
+    /**
+     * @return \Nette\Utils\ArrayHash $arrayHash
+     */
     public function toArrayHash():ArrayHash
     {
         return new ArrayHash([
@@ -133,6 +145,24 @@ class Product
     public function setImage(string $image): Product
     {
         $this->image = $image;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getAvailability(): int
+    {
+        return $this->availability;
+    }
+
+    /**
+     * @param int $availability
+     * @return Product
+     */
+    public function setAvailability(int $availability): Product
+    {
+        $this->availability = $availability;
         return $this;
     }
 }

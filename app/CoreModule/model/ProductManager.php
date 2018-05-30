@@ -2,13 +2,25 @@
 
 namespace App\CoreModule\Model;
 use App\CoreModule\Model\Shop\Product;
+use App\CoreModule\Model\Shop\ProductFactory;
 use App\Model\BaseManager;
+use Nette\Database\Context;
 use Nette\Database\Table\IRow;
 use Nette\Database\Table\ActiveRow;
-use Nette\Utils\ArrayHash;
 
 class ProductManager extends BaseManager
 {
+    /**
+     * @var ProductFactory $factory
+     */
+    private $factory;
+
+    public function __construct(Context $context, ProductFactory $factory)
+    {
+        parent::__construct($context);
+        $this->factory = $factory;
+    }
+
     const TABLE_NAME = 'product',
         COLUMN_ID = 'id';
 
@@ -17,16 +29,37 @@ class ProductManager extends BaseManager
      */
     public function getProducts()
     {
-        return $this->db->table(self::TABLE_NAME)->order(self::COLUMN_ID . 'DESC')->fetchAll();
+        $products = [];
+        $dbProducts = $this->db->table(self::TABLE_NAME)->order(self::COLUMN_ID . 'DESC')->fetchAll();
+        foreach ($dbProducts as $dbProduct)
+        {
+            $products[] = $this->factory->createProduct(
+                $dbProduct->id,
+                $dbProduct->name,
+                $dbProduct->price,
+                $dbProduct->description,
+                $dbProduct->image,
+                $dbProduct->availability
+            );
+        }
+        return $products;
     }
 
     /**
      * @param int $id
-     * @return false|\Nette\Database\Table\ActiveRow
+     * @return Product
      */
     public function getProduct(int $id)
     {
-        return $this->db->table(self::TABLE_NAME)->where(self::COLUMN_ID, $id)->fetch();
+        $meta = $this->db->table(self::TABLE_NAME)->where(self::COLUMN_ID, $id)->fetch();
+        return $this->factory->createProduct(
+            $meta->id,
+            $meta->name,
+            $meta->price,
+            $meta->description,
+            $meta->image,
+            $meta->availability
+        );
     }
 
     /**
@@ -43,10 +76,25 @@ class ProductManager extends BaseManager
     }
 
     /**
-     * @param $product
+     * @param int $id
+     * @param string $name
+     * @param string $description
+     * @param float $price
+     * @param string $image
+     * @param int $availability
+     * @return Product
      */
-    public function deleteProduct($product)
+    public function createProduct(int $id, string $name, string $description, float $price, string $image, int $availability = Product::AVAILABLE)
     {
+        return $this->factory->createProduct($id, $name, $price, $description, $image, $availability);
+    }
+
+    /**
+     * @param Product $product
+     */
+    public function deleteProduct(Product $product)
+    {
+        $product = $product->toArrayHash();
         $this->db->table(self::TABLE_NAME)->where(self::COLUMN_ID, $product[self::COLUMN_ID])->delete();
     }
 }
