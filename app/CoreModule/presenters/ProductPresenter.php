@@ -1,5 +1,7 @@
 <?php
 
+namespace App\CoreModule\Presenters;
+
 use App\Presenters\BasePresenter;
 use App\CoreModule\Model\ProductManager;
 
