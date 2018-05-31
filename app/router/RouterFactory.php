@@ -19,7 +19,7 @@ class RouterFactory
 		$router = new RouteList;
 		//$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
 		//$router[] = new Route('<presenter>/[<category>]/[<name>]-[<id>]', 'Core:Product:default');
-        $router[] = new Route('<presenter>/[<id>]', [
+        $router[] = new Route('<presenter>', [
             'presenter' => 'Core:Product',
             'action' => [
                 Route::FILTER_TABLE => [
