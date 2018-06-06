@@ -2,10 +2,11 @@
 namespace App\Model;
 
 use Nette\Database\Context;
-use Nette\Object;
 
-abstract class BaseManager extends Object
+abstract class BaseManager
 {
+    use \Nette\SmartObject;
+
     /** @var Context db context for db handling */
     protected $db;
 

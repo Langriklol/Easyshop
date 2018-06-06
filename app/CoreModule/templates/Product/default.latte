@@ -1,3 +1,10 @@
-<img height="200" width="200" src="{$product->image}" alt="{$product->name} thumbnail" />
-<h2>{$product->name}</h2>
-<i>{$product->description}</i> <b>{$product->price} €</b>
+{if $product}
+<div class="product">
+    <img height="200" width="200" src="{$product->getImage()}" alt="{$product->getName()} thumbnail" />
+    <h2>{$product->getName()}</h2>
+    <i>{$product->getDescription()}</i> <b>{$product->getPrice()} €</b><br/>
+    Currently <b>{$product->getAvailability()}</b>
+</div>
+{else}
+    <h2>No product found</h2>
+{/if}

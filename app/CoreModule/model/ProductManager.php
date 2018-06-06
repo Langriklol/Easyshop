@@ -22,7 +22,7 @@ class ProductManager extends BaseManager
     }
 
     const TABLE_NAME = 'product',
-        COLUMN_ID = 'id';
+        COLUMN_ID = 'product_id';
 
     /**
      * @return array|IRow[] products
@@ -30,11 +30,11 @@ class ProductManager extends BaseManager
     public function getProducts()
     {
         $products = [];
-        $dbProducts = $this->db->table(self::TABLE_NAME)->order(self::COLUMN_ID . 'DESC')->fetchAll();
+        $dbProducts = $this->db->table(self::TABLE_NAME)->order(self::COLUMN_ID)->fetchAll();
         foreach ($dbProducts as $dbProduct)
         {
             $products[] = $this->factory->createProduct(
-                $dbProduct->id,
+                $dbProduct->product_id,
                 $dbProduct->name,
                 $dbProduct->price,
                 $dbProduct->description,
@@ -53,7 +53,7 @@ class ProductManager extends BaseManager
     {
         $meta = $this->db->table(self::TABLE_NAME)->where(self::COLUMN_ID, $id)->fetch();
         return $this->factory->createProduct(
-            $meta->id,
+            $id,
             $meta->name,
             $meta->price,
             $meta->description,
@@ -64,15 +64,16 @@ class ProductManager extends BaseManager
 
     /**
      * @param $product Product product
+     * @return bool
      */
-    public function saveProduct(Product $product)
+    public function saveProduct(Product $product): bool
     {
         $product = $product->toArrayHash();
         // How to save one DB query? Check if product have product id, then it is not new
         if(!$product[self::COLUMN_ID])
-            $this->db->table(self::TABLE_NAME)->insert($product);
+            return $this->db->table(self::TABLE_NAME)->insert($product);
         else
-            $this->db->table(self::TABLE_NAME)->where(self::COLUMN_ID, $product[self::COLUMN_ID])->update($product);
+            return $this->db->table(self::TABLE_NAME)->where(self::COLUMN_ID, $product[self::COLUMN_ID])->update($product);
     }
 
     /**
@@ -81,10 +82,10 @@ class ProductManager extends BaseManager
      * @param string $description
      * @param float $price
      * @param string $image
-     * @param int $availability
+     * @param string $availability
      * @return Product
      */
-    public function createProduct(int $id, string $name, string $description, float $price, string $image, int $availability = Product::AVAILABLE)
+    public function createProduct(int $id, string $name, string $description, float $price, string $image, string $availability = Product::AVAILABLE)
     {
         return $this->factory->createProduct($id, $name, $price, $description, $image, $availability);
     }

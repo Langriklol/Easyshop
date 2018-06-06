@@ -4,13 +4,26 @@ parameters:
 application:
 	errorPresenter: Error
 	mapping:
-		*: App\*Module\Presenters\*Presenter
+	    Admin: App\AdminModule\*Presenter
+	    *: App\*Module\Presenters\*Presenter
 
+forms:
+        messages:
+                REQUIRED: 'Required field.'
 
 session:
-	expiration: 14 days
-
+	expiration: 30 minutes
+database:
+	dsn: 'mysql:host=127.0.0.1;dbname=eshop'
+	user: root
+	password:
+	options:
+	       lazy: yes
+	       debugger: true
 
 services:
 	router: App\RouterFactory::createRouter
 	- App\CoreModule\Model\Shop\Basket
+
+includes:
+        - ../CoreModule/config/config.neon

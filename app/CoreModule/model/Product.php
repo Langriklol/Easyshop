@@ -6,9 +6,9 @@ use Nette\Utils\ArrayHash;
 
 class Product
 {
-    const AVAILABLE = 2,
-        WAITING = 4,
-        UNAVAILABLE = 8;
+    const AVAILABLE = 'Available',
+        WAITING = 'Waiting',
+        UNAVAILABLE = 'Unavailable';
 
     /**
      * @var int $id product id
@@ -121,7 +121,7 @@ class Product
      */
     public function toArrayHash():ArrayHash
     {
-        return new ArrayHash([
+        return ArrayHash::from([
             'product_id' => $this->getId(),
             'name' => $this->getName(),
             'description' => $this->getDescription(),
@@ -149,18 +149,18 @@ class Product
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getAvailability(): int
+    public function getAvailability(): string
     {
         return $this->availability;
     }
 
     /**
-     * @param int $availability
+     * @param string $availability
      * @return Product
      */
-    public function setAvailability(int $availability): Product
+    public function setAvailability(string $availability): Product
     {
         $this->availability = $availability;
         return $this;

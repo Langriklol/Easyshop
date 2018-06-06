@@ -29,37 +29,43 @@ class AdministrationFormFactory
      */
     public function productFormSucceeded($form, $values)
     {
-        if($values->product_image->isImage() && $values->product_image->isOk())
-        {
-            $image = $values->product_image;
-            $image_name = $image->getSanitizedName();
-        }
+        $image = $values->image;
+        $imagePath = './pics/product/' . $image->getName();
+        $image->move($imagePath);
         $product = $this->productManager->createProduct(
             $values->product_id,
-            $values->product_name,
-            $values->product_description,
-            $values->product_price,
-            $values->product_image
+            $values->name,
+            $values->description,
+            $values->price,
+            $imagePath
         );
+        $this->productManager->saveProduct($product);
+    }
+
+    public function createProductFormBasic():Form
+    {
+        $form = new Form();
+        $form->addInteger('product_id', 'Product id')
+            ->setRequired();
+        $form->addText('name', 'Product name')
+            ->setRequired();
+        $form->addText('description', 'Description');
+        $form->addText('price', 'Price')
+            ->setRequired();
+        return $form;
     }
 
     /**
      * @return Form
      */
-    public function createBasicForm(): Form
+    public function createProductForm(): Form
     {
-        $form = new Form();
-        $form->addInteger('product_id', 'Product id')
-            ->setRequired();
-        $form->addText('product_name', 'Product name')
-            ->setRequired();
-        $form->addText('product_description', 'Description');
-        $form->addText('product_price', 'Price')
-            ->setRequired();
-        $form->addUpload('product_image', 'Thumbnail')
+        $form = $this->createProductFormBasic();
+        $form->addUpload('image', 'Thumbnail')
             ->addCondition(Form::IMAGE)
-            ->addRule(Form::MIME_TYPE, 'Product thumbnail must be JPEG or PNG', ['image/jpeg', 'image/png']);
-        $form->addSubmit('product_add', 'Add product');
+            ->addRule(Form::MIME_TYPE, 'Product thumbnail must be JPEG or PNG', ['image/jpeg', 'image/png'])
+            ->setRequired();
+        $form->addSubmit('add', 'Add product');
         $form->onSuccess[] = [$this, 'productFormSucceeded'];
 
         return $form;

@@ -2,30 +2,66 @@
 
 namespace App\CoreModule\Presenters;
 
+use App\Forms\AdministrationFormFactory;
 use App\Presenters\BasePresenter;
 use App\CoreModule\Model\ProductManager;
+use Nette\Application\BadRequestException;
 use Nette\Utils\ArrayHash;
 
 class ProductPresenter extends BasePresenter
 {
     /**
-     * @var ProductManager @inject
+     * @var ProductManager $productManager
      */
     private $productManager;
 
-    public function renderDefault(/*int $id*/)
+    /**
+     * @var AdministrationFormFactory $formFactory
+     */
+    private $formFactory;
+
+    public function __construct(ProductManager $productManager, AdministrationFormFactory $formFactory)
     {
-        //$this->template->product = $this->productManager->getProduct($id);
-        $this->template->product = ArrayHash::from([
-            'name' => 'product',
-            'description' => 'product description',
-            'price' => 'moc',
-            'image' => 'https://5.imimg.com/data5/AW/QD/MY-23353183/flower-pot-500x500.jpg'
-        ]);
+        parent::__construct();
+        $this->productManager = $productManager;
+        $this->formFactory = $formFactory;
     }
 
-    public function createComponentProductEditor()
+    /**
+     * @param int $id
+     * @throws BadRequestException
+     */
+    public function actionEdit(int $id)
     {
+        if($id){
+            $product = $this->productManager->getProduct($id);
+            $product ?
+                $this['productEditorForm']->setDefaults($product->toArrayHash()):
+                $this->flashMessage('Product not found.');
+        }else{
+            throw new BadRequestException();
+        }
+    }
 
+    /**
+     * @param int|null $id
+     */
+    public function renderDefault(int $id = null)
+    {
+        $this->template->product = null;
+        if($id){
+            bdump($this->productManager->getProduct($id)->toArrayHash());
+            $this->template->product = $this->productManager->getProduct($id);
+        }
+    }
+
+    public function renderList()
+    {
+        $this->template->products = $this->productManager->getProducts();
+    }
+    
+    public function createComponentProductEditorForm()
+    {
+        return $this->formFactory->createProductForm();
     }
 }
