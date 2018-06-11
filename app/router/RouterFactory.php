@@ -26,7 +26,8 @@ class RouterFactory
                 Route::VALUE => 'default',
                 Route::FILTER_TABLE => [
                     'detail' => 'default',
-                    'edit' => 'edit'
+                    'edit' => 'edit',
+                    'remove' => 'delete'
                 ],
                 Route::FILTER_STRICT => true
             ]

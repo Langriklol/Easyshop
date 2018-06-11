@@ -6,6 +6,7 @@ use App\CoreModule\Model\Shop\Product;
 use App\Forms\AdministrationFormFactory;
 use App\Presenters\BasePresenter;
 use App\CoreModule\Model\ProductManager;
+use http\Exception\BadUrlException;
 use Nette\Application\BadRequestException;
 use Nette\Utils\ArrayHash;
 
@@ -46,6 +47,26 @@ class ProductPresenter extends BasePresenter
                 $this->flashMessage('Product not found.');
         }else{
             throw new BadRequestException();
+        }
+    }
+
+    /**
+     * @param int $id
+     * @throws \Nette\Application\AbortException
+     * @throws \http\Exception\BadUrlException
+     */
+    public function actionDelete(int $id)
+    {
+        if($id)
+        {
+            try{
+                $product = $this->productManager->getProduct($id);
+                $this->productManager->deleteProduct($product);
+                $this->redirect('Product:list');
+            }catch (BadUrlException $e) {
+                throw $e;
+            }
+
         }
     }
 
