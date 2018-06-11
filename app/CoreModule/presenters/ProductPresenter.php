@@ -2,6 +2,7 @@
 
 namespace App\CoreModule\Presenters;
 
+use App\CoreModule\Model\Shop\Product;
 use App\Forms\AdministrationFormFactory;
 use App\Presenters\BasePresenter;
 use App\CoreModule\Model\ProductManager;
@@ -27,6 +28,11 @@ class ProductPresenter extends BasePresenter
         $this->formFactory = $formFactory;
     }
 
+    public function actionAdd()
+    {
+        
+    }
+
     /**
      * @param int $id
      * @throws BadRequestException
@@ -50,7 +56,6 @@ class ProductPresenter extends BasePresenter
     {
         $this->template->product = null;
         if($id){
-            bdump($this->productManager->getProduct($id)->toArrayHash());
             $this->template->product = $this->productManager->getProduct($id);
         }
     }

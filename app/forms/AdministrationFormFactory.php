@@ -27,27 +27,37 @@ class AdministrationFormFactory
      * @param $form
      * @param $values
      */
-    public function productFormSucceeded($form, $values)
+    public function productFormSucceeded(Form $form, $values)
     {
         $image = $values->image;
         $imagePath = './pics/product/' . $image->getName();
         $image->move($imagePath);
         $product = $this->productManager->createProduct(
-            $values->product_id,
+            null,
             $values->name,
+            $values->manufacturer,
+            $values->category,
             $values->description,
             $values->price,
             $imagePath
         );
-        $this->productManager->saveProduct($product);
+        $row = $this->productManager->saveProduct($product);
+        bdump($row->toArray());
+        $productId = $row->toArray()['product_id'];
+        $form->getPresenter()->redirect('Product:default', ['id' => $productId]);
     }
 
+    /**
+     * @return Form
+     */
     public function createProductFormBasic():Form
     {
         $form = new Form();
-        $form->addInteger('product_id', 'Product id')
-            ->setRequired();
         $form->addText('name', 'Product name')
+            ->setRequired();
+        $form->addText('manufacturer', 'Manufacturer')
+            ->setRequired();
+        $form->addText('category', 'Category')
             ->setRequired();
         $form->addText('description', 'Description');
         $form->addText('price', 'Price')
@@ -67,7 +77,6 @@ class AdministrationFormFactory
             ->setRequired();
         $form->addSubmit('add', 'Add product');
         $form->onSuccess[] = [$this, 'productFormSucceeded'];
-
         return $form;
     }
 }

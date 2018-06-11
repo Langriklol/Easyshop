@@ -19,18 +19,19 @@ class RouterFactory
 		$router = new RouteList;
 		//$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
 		//$router[] = new Route('<presenter>/[<category>]/[<name>]-[<id>]', 'Core:Product:default');
+        $router[] = new Route('product/add', 'Core:Product:add');
         $router[] = new Route('product/[<id>]/<action>', [
             'presenter' => 'Core:Product',
             'action' => [
-                Route::VALUE => 'list',
+                Route::VALUE => 'default',
                 Route::FILTER_TABLE => [
                     'detail' => 'default',
-                    'list' => 'list',
                     'edit' => 'edit'
                 ],
                 Route::FILTER_STRICT => true
             ]
         ]);
+        $router[] = new Route('product/', 'Core:Product:list');
 		return $router;
 	}
 }

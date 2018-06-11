@@ -21,6 +21,16 @@ class Product
     private $name;
 
     /**
+     * @var string $manufacturer
+     */
+    private $manufacturer;
+
+    /**
+     * @var string $category
+     */
+    private $category;
+
+    /**
      * @var int $price product price
      */
     private $price;
@@ -45,7 +55,7 @@ class Product
     }
     
     /**
-     * @return int
+     * @return int|null
      */
     public function getId()
     {
@@ -53,10 +63,10 @@ class Product
     }
 
     /**
-     * @param int $id
+     * @param int? $id
      * @return Product
      */
-    public function setId(int $id): Product
+    public function setId(int $id = null): Product
     {
         $this->id = $id;
         return $this;
@@ -124,6 +134,8 @@ class Product
         return ArrayHash::from([
             'product_id' => $this->getId(),
             'name' => $this->getName(),
+            'manufacturer' => $this->getManufacturer(),
+            'category' => $this->getCategory(),
             'description' => $this->getDescription(),
             'price' => $this->getPrice(),
             'image' => $this->getImage()
@@ -164,5 +176,41 @@ class Product
     {
         $this->availability = $availability;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getManufacturer(): string
+    {
+        return $this->manufacturer;
+    }
+
+    /**
+     * @param string $manufacturer
+     * @return Product
+     */
+    public function setManufacturer(string $manufacturer): Product
+    {
+        $this->manufacturer = $manufacturer;
+        return $this;
+    }
+
+    /**
+     * @param string $category
+     * @return Product
+     */
+    public function setCategory(string $category): Product
+    {
+        $this->category = $category;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCategory(): string
+    {
+        return $this->category;
     }
 }

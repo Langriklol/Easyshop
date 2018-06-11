@@ -1,6 +1,6 @@
 {if $product}
 <div class="product">
-    <img height="200" width="200" src="{$product->getImage()}" alt="{$product->getName()} thumbnail" />
+    <img height="200" width="200" src="{$basePath}/{$product->getImage()}" alt="{$product->getName()} thumbnail" />
     <h2>{$product->getName()}</h2>
     <i>{$product->getDescription()}</i> <b>{$product->getPrice()} €</b><br/>
     Currently <b>{$product->getAvailability()}</b>

@@ -36,6 +36,8 @@ class ProductManager extends BaseManager
             $products[] = $this->factory->createProduct(
                 $dbProduct->product_id,
                 $dbProduct->name,
+                $dbProduct->manufacturer,
+                $dbProduct->category,
                 $dbProduct->price,
                 $dbProduct->description,
                 $dbProduct->image,
@@ -55,6 +57,8 @@ class ProductManager extends BaseManager
         return $this->factory->createProduct(
             $id,
             $meta->name,
+            $meta->manufacturer,
+            $meta->category,
             $meta->price,
             $meta->description,
             $meta->image,
@@ -64,9 +68,9 @@ class ProductManager extends BaseManager
 
     /**
      * @param $product Product product
-     * @return bool
+     * @return ActiveRow|int Returns ActiveRow or number of affected rows
      */
-    public function saveProduct(Product $product): bool
+    public function saveProduct(Product $product)
     {
         $product = $product->toArrayHash();
         // How to save one DB query? Check if product have product id, then it is not new
@@ -77,17 +81,19 @@ class ProductManager extends BaseManager
     }
 
     /**
-     * @param int $id
+     * @param int|null $id
      * @param string $name
+     * @param string $manufacturer
+     * @param string $category
      * @param string $description
      * @param float $price
      * @param string $image
      * @param string $availability
      * @return Product
      */
-    public function createProduct(int $id, string $name, string $description, float $price, string $image, string $availability = Product::AVAILABLE)
+    public function createProduct(?int $id = null, string $name, string $manufacturer, string $category, string $description, float $price, string $image, string $availability = Product::AVAILABLE)
     {
-        return $this->factory->createProduct($id, $name, $price, $description, $image, $availability);
+        return $this->factory->createProduct($id, $name, $manufacturer, $category, $price, $description, $image, $availability);
     }
 
     /**
