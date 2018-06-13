@@ -7,7 +7,7 @@
  */
 
 namespace App\CoreModule\Model\Shop;
-
+use Nette;
 
 class Basket
 {
@@ -25,7 +25,7 @@ class Basket
      */
     public function getProducts(): array
     {
-        return $this->products;
+        return $this->products ?: [];
     }
 
     /**

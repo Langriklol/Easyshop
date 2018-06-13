@@ -1,0 +1,21 @@
+<h1>Basket</h1>
+<table>
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Name</td>
+            <td>Description</td>
+            <td>Count</td>
+        </tr>
+    </thead>
+    <tbody>
+        {foreach $products as $product}
+            <tr>
+                <td>{$product->getId()}</td>
+                <td>{$product->getName()}</td>
+                <td>{$product->getDescription()}</td>
+                <td>{$basket->countProducts($product)}</td>
+            </tr>
+        {/foreach}
+    </tbody>
+</table>
