@@ -29,9 +29,14 @@ class ProductPresenter extends BasePresenter
         $this->formFactory = $formFactory;
     }
 
-    public function actionAdd()
+    /**
+     * @param int $id Adds product of quantity one to basket
+     */
+    public function handleAdd(int $id)
     {
-        
+        $product = $this->productManager->getProduct($id);
+        $this->basket->addProduct($product);
+        $this->flashMessage('You added one item to your basket.');
     }
 
     /**

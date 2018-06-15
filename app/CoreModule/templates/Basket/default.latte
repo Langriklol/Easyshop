@@ -11,10 +11,11 @@
     <tbody>
         {foreach $products as $product}
             <tr>
-                <td>{$product->getId()}</td>
-                <td>{$product->getName()}</td>
-                <td>{$product->getDescription()}</td>
-                <td>{$basket->countProducts($product)}</td>
+                <td>{$product->id}</td>
+                <td>{$product->name}</td>
+                <td>{$product->description}</td>
+                <td>{$product->count}</td>
+                <td><a href="{link remove!, $product->id}">Remove</a></td>
             </tr>
         {/foreach}
     </tbody>

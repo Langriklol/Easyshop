@@ -4,6 +4,7 @@
     <h2>{$product->getName()}</h2>
     <i>{$product->getDescription()}</i> <b>{$product->getPrice()} €</b><br/>
     Currently <b>{$product->getAvailability()}</b>
+    <a href="{link add! id => $product->getId(), do => add}">Add to basket</a>
 </div>
 {else}
     <h2>No product found</h2>

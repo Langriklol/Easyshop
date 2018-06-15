@@ -33,6 +33,15 @@ class RouterFactory
             ]
         ]);
         $router[] = new Route('product/', 'Core:Product:list');
+        $router[] = new Route('basket/<action>/[<id>]', [
+            'presenter' => 'Core:Basket',
+            'action' => [
+                Route::VALUE => 'default',
+                Route::FILTER_TABLE => [
+                    'default' => 'default',
+                ],
+            ]
+        ]);
 		return $router;
 	}
 }

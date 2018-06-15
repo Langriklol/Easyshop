@@ -26,8 +26,9 @@ abstract class BasePresenter extends Presenter
    {
        parent::startup();
        $this->session = $this->getSession('basket');
-       $this->basket = $this->session->basket ?: new Basket();
-       $this->template->basket = count($this->basket->getProducts());
+       $this->session->basket = ($this->session->basket instanceof Basket) ? $this->session->basket : new Basket();
+       $this->basket = &$this->session->basket;
+       $this->template->basketItemCount = count($this->basket->getProducts());
        bdump($this->basket);
    }
 

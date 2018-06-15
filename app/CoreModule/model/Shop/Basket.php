@@ -8,6 +8,7 @@
 
 namespace App\CoreModule\Model\Shop;
 use Nette;
+use Nette\Utils\ArrayHash;
 
 class Basket
 {
@@ -39,7 +40,6 @@ class Basket
         return $this;
     }
 
-
     /**
      * @param Product $product product to add into basket
      * @return Basket $this fluent setter
@@ -52,14 +52,49 @@ class Basket
 
     public function removeProduct(Product $product)
     {
-        $counter = 0;
-        foreach ($this->products as $item) {
-            if ($product == $item)
+        foreach ($this->products as $key => $item)
+        {
+            if($item->getId() === $product->getId())
             {
-                unset($this->products[$counter]);
+                unset($this->products[$key]);
                 return;
             }
-            $counter++;
         }
+    }
+
+    /**
+     * @return ArrayHash $products Make array for frontend
+     */
+    public function renderProductFrontend(): ArrayHash
+    {
+        $productCount = [];
+        $productIndexer = [];
+        if($this->products) {
+            foreach ($this->products as $product) {
+                if(isset($productCount[$product->getId()]))
+                    $productCount[$product->getId()]++;
+                else
+                    $productCount[$product->getId()] = 1;
+            }
+            $productFrontend = [];
+            foreach ($this->products as $product) {
+                if(!isset($productIndexer[$product->getId()])) {
+                    $productFrontend[] = [
+                        'id' => $product->getId(),
+                        'name' => $product->getName(),
+                        'description' => $product->getDescription(),
+                        'category' => $product->getCategory(),
+                        'manufacturer' => $product->getManufacturer(),
+                        'price' => $product->getPrice(),
+                        'availability' => $product->getAvailability(),
+                        'image' => $product->getImage(),
+                        'count' => $productCount[$product->getId()]
+                    ];
+                    $productIndexer[$product->getId()] = 1;
+                }
+            }
+            return ArrayHash::from($productFrontend);
+        }
+        return ArrayHash::from([]);
     }
 }
