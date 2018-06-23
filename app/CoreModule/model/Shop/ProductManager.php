@@ -1,6 +1,6 @@
 <?php
 
-namespace App\CoreModule\Model;
+namespace App\CoreModule\Model\Shop;
 use App\CoreModule\Model\Shop\Product;
 use App\CoreModule\Model\Shop\ProductFactory;
 use App\Model\BaseManager;

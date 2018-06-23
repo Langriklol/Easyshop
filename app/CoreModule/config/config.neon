@@ -2,6 +2,6 @@ parameters:
     product: Core:Product
 
 services:
-    - App\CoreModule\Model\ProductManager
+    - App\CoreModule\Model\Shop\ProductManager
     - App\CoreModule\Model\Shop\ProductFactory
     - App\Forms\AdministrationFormFactory

@@ -1,0 +1,4 @@
+{foreach $orders as $order}
+    <h1>Order: {$order->name}</h1>
+    <b>Issued at: {$order->created_at}</b>
+{/foreach}

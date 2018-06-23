@@ -19,9 +19,13 @@ class Invoice
     /** @var string $createdAt Date of created invoice */
     private $createdAt;
     /** @var string */
-    private $clientAddress;
-
     private $clientName;
-
+    /** @var string */
+    private $clientAddress;
+    /** @var string */
     private $clientCity;
+
+    public function __construct()
+    {
+    }
 }

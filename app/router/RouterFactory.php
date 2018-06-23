@@ -32,7 +32,7 @@ class RouterFactory
                 Route::FILTER_STRICT => true
             ]
         ]);
-        $router[] = new Route('product/', 'Core:Product:list');
+        $router[] = new Route('<action>', 'Core:Product:list');
         $router[] = new Route('basket/<action>/[<id>]', [
             'presenter' => 'Core:Basket',
             'action' => [
@@ -42,6 +42,17 @@ class RouterFactory
                 ],
             ]
         ]);
-		return $router;
+        $router[] = new Route('order/[<id>]/[<action>]', [
+            'presenter' => 'Core:Order',
+            'action' => [
+                Route::VALUE => 'default',
+                Route::FILTER_TABLE => [
+                    'detail' => 'default',
+                    'list' => 'list'
+                ],
+                Route::FILTER_STRICT => true
+            ]
+        ]);
+        return $router;
 	}
 }
