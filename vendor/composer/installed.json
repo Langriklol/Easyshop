@@ -1,17 +1,17 @@
 [
     {
         "name": "latte/latte",
-        "version": "v2.4.7",
-        "version_normalized": "2.4.7.0",
+        "version": "v2.4.8",
+        "version_normalized": "2.4.8.0",
         "source": {
             "type": "git",
             "url": "https://github.com/nette/latte.git",
-            "reference": "f989b018ec12f9492132515cd47f83f98429c513"
+            "reference": "95ca6bab6caaa3efa3b5d7d4537f9a45cb89ed90"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/nette/latte/zipball/f989b018ec12f9492132515cd47f83f98429c513",
-            "reference": "f989b018ec12f9492132515cd47f83f98429c513",
+            "url": "https://api.github.com/repos/nette/latte/zipball/95ca6bab6caaa3efa3b5d7d4537f9a45cb89ed90",
+            "reference": "95ca6bab6caaa3efa3b5d7d4537f9a45cb89ed90",
             "shasum": ""
         },
         "require": {
@@ -31,7 +31,7 @@
             "ext-mbstring": "to use filters like lower, upper, capitalize, ...",
             "nette/utils": "to use filter |webalize"
         },
-        "time": "2018-02-06T14:42:33+00:00",
+        "time": "2018-06-03T17:34:15+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -74,18 +74,135 @@
         ]
     },
     {
-        "name": "nette/application",
-        "version": "v2.4.11",
-        "version_normalized": "2.4.11.0",
+        "name": "mpdf/mpdf",
+        "version": "v7.1.0",
+        "version_normalized": "7.1.0.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/nette/application.git",
-            "reference": "2379b1ddeb1f2aebf21b73db67659575442c588a"
+            "url": "https://github.com/mpdf/mpdf.git",
+            "reference": "8e3d0d7bf74f71d04904215fb487d01e924c469a"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/nette/application/zipball/2379b1ddeb1f2aebf21b73db67659575442c588a",
-            "reference": "2379b1ddeb1f2aebf21b73db67659575442c588a",
+            "url": "https://api.github.com/repos/mpdf/mpdf/zipball/8e3d0d7bf74f71d04904215fb487d01e924c469a",
+            "reference": "8e3d0d7bf74f71d04904215fb487d01e924c469a",
+            "shasum": ""
+        },
+        "require": {
+            "ext-gd": "*",
+            "ext-mbstring": "*",
+            "myclabs/deep-copy": "^1.7",
+            "paragonie/random_compat": "^1.4|^2.0",
+            "php": "^5.6 || ~7.0.0 || ~7.1.0 || ~7.2.0",
+            "psr/log": "^1.0",
+            "setasign/fpdi": "1.6.*"
+        },
+        "require-dev": {
+            "mockery/mockery": "^0.9.5",
+            "phpunit/phpunit": "^5.0",
+            "squizlabs/php_codesniffer": "^2.7.0",
+            "tracy/tracy": "^2.4"
+        },
+        "suggest": {
+            "ext-bcmath": "Needed for generation of some types of barcodes",
+            "ext-xml": "Needed mainly for SVG manipulation",
+            "ext-zlib": "Needed for compression of embedded resources, such as fonts"
+        },
+        "time": "2018-05-18T05:41:37+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-development": "7.0-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Mpdf\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "GPL-2.0-only"
+        ],
+        "authors": [
+            {
+                "name": "Matěj Humpál",
+                "role": "Developer, maintainer"
+            },
+            {
+                "name": "Ian Back",
+                "role": "Developer (retired)"
+            }
+        ],
+        "description": "A PHP class to generate PDF files from HTML with Unicode/UTF-8 and CJK support",
+        "homepage": "https://mpdf.github.io",
+        "keywords": [
+            "pdf",
+            "php",
+            "utf-8"
+        ]
+    },
+    {
+        "name": "myclabs/deep-copy",
+        "version": "1.7.0",
+        "version_normalized": "1.7.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/myclabs/DeepCopy.git",
+            "reference": "3b8a3a99ba1f6a3952ac2747d989303cbd6b7a3e"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/3b8a3a99ba1f6a3952ac2747d989303cbd6b7a3e",
+            "reference": "3b8a3a99ba1f6a3952ac2747d989303cbd6b7a3e",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^5.6 || ^7.0"
+        },
+        "require-dev": {
+            "doctrine/collections": "^1.0",
+            "doctrine/common": "^2.6",
+            "phpunit/phpunit": "^4.1"
+        },
+        "time": "2017-10-19T19:58:43+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "DeepCopy\\": "src/DeepCopy/"
+            },
+            "files": [
+                "src/DeepCopy/deep_copy.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "description": "Create deep copies (clones) of your objects",
+        "keywords": [
+            "clone",
+            "copy",
+            "duplicate",
+            "object",
+            "object graph"
+        ]
+    },
+    {
+        "name": "nette/application",
+        "version": "v2.4.12",
+        "version_normalized": "2.4.12.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/nette/application.git",
+            "reference": "fe1915f880d8e5d16217bad467950733fd5cbad3"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/nette/application/zipball/fe1915f880d8e5d16217bad467950733fd5cbad3",
+            "reference": "fe1915f880d8e5d16217bad467950733fd5cbad3",
             "shasum": ""
         },
         "require": {
@@ -115,7 +232,7 @@
             "latte/latte": "Allows using Latte in templates",
             "nette/forms": "Allows to use Nette\\Application\\UI\\Form"
         },
-        "time": "2018-03-07T16:04:13+00:00",
+        "time": "2018-05-16T09:28:51+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -164,17 +281,17 @@
     },
     {
         "name": "nette/bootstrap",
-        "version": "v2.4.5",
-        "version_normalized": "2.4.5.0",
+        "version": "v2.4.6",
+        "version_normalized": "2.4.6.0",
         "source": {
             "type": "git",
             "url": "https://github.com/nette/bootstrap.git",
-            "reference": "804925787764d708a7782ea0d9382a310bb21968"
+            "reference": "268816e3f1bb7426c3a4ceec2bd38a036b532543"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/nette/bootstrap/zipball/804925787764d708a7782ea0d9382a310bb21968",
-            "reference": "804925787764d708a7782ea0d9382a310bb21968",
+            "url": "https://api.github.com/repos/nette/bootstrap/zipball/268816e3f1bb7426c3a4ceec2bd38a036b532543",
+            "reference": "268816e3f1bb7426c3a4ceec2bd38a036b532543",
             "shasum": ""
         },
         "require": {
@@ -203,7 +320,7 @@
             "nette/robot-loader": "to use Configurator::createRobotLoader()",
             "tracy/tracy": "to use Configurator::enableTracy()"
         },
-        "time": "2017-08-20T17:36:59+00:00",
+        "time": "2018-05-17T12:52:20+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -376,17 +493,17 @@
     },
     {
         "name": "nette/database",
-        "version": "v2.4.5",
-        "version_normalized": "2.4.5.0",
+        "version": "v2.4.6",
+        "version_normalized": "2.4.6.0",
         "source": {
             "type": "git",
             "url": "https://github.com/nette/database.git",
-            "reference": "c9b1963ee63273bb855e85fb62fa9c4154c616e3"
+            "reference": "b094b7ae07daa7d4c188168f78b15eb2f4f27212"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/nette/database/zipball/c9b1963ee63273bb855e85fb62fa9c4154c616e3",
-            "reference": "c9b1963ee63273bb855e85fb62fa9c4154c616e3",
+            "url": "https://api.github.com/repos/nette/database/zipball/b094b7ae07daa7d4c188168f78b15eb2f4f27212",
+            "reference": "b094b7ae07daa7d4c188168f78b15eb2f4f27212",
             "shasum": ""
         },
         "require": {
@@ -404,7 +521,7 @@
             "nette/tester": "^2.0",
             "tracy/tracy": "^2.4"
         },
-        "time": "2018-02-05T18:46:36+00:00",
+        "time": "2018-06-01T15:50:27+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -450,17 +567,17 @@
     },
     {
         "name": "nette/di",
-        "version": "v2.4.11",
-        "version_normalized": "2.4.11.0",
+        "version": "v2.4.12",
+        "version_normalized": "2.4.12.0",
         "source": {
             "type": "git",
             "url": "https://github.com/nette/di.git",
-            "reference": "a300c8b8e8549595ab90c04d8ee21b8b2a5a88f9"
+            "reference": "8e717aed2d182a26763be58c220eebaaa32917df"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/nette/di/zipball/a300c8b8e8549595ab90c04d8ee21b8b2a5a88f9",
-            "reference": "a300c8b8e8549595ab90c04d8ee21b8b2a5a88f9",
+            "url": "https://api.github.com/repos/nette/di/zipball/8e717aed2d182a26763be58c220eebaaa32917df",
+            "reference": "8e717aed2d182a26763be58c220eebaaa32917df",
             "shasum": ""
         },
         "require": {
@@ -478,7 +595,7 @@
             "nette/tester": "^2.0",
             "tracy/tracy": "^2.3"
         },
-        "time": "2018-03-28T23:53:36+00:00",
+        "time": "2018-04-26T09:18:42+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -649,17 +766,17 @@
     },
     {
         "name": "nette/http",
-        "version": "v2.4.8",
-        "version_normalized": "2.4.8.0",
+        "version": "v2.4.9",
+        "version_normalized": "2.4.9.0",
         "source": {
             "type": "git",
             "url": "https://github.com/nette/http.git",
-            "reference": "98974c30053747b5d16b0b7729c709a2fb594f23"
+            "reference": "2107b7983024e526d8f83e0b85793a05151737bf"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/nette/http/zipball/98974c30053747b5d16b0b7729c709a2fb594f23",
-            "reference": "98974c30053747b5d16b0b7729c709a2fb594f23",
+            "url": "https://api.github.com/repos/nette/http/zipball/2107b7983024e526d8f83e0b85793a05151737bf",
+            "reference": "2107b7983024e526d8f83e0b85793a05151737bf",
             "shasum": ""
         },
         "require": {
@@ -678,7 +795,7 @@
             "ext-fileinfo": "to detect type of uploaded files",
             "nette/security": "allows use Nette\\Http\\UserStorage"
         },
-        "time": "2018-03-14T18:55:13+00:00",
+        "time": "2018-04-26T09:25:36+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -723,17 +840,17 @@
     },
     {
         "name": "nette/mail",
-        "version": "v2.4.4",
-        "version_normalized": "2.4.4.0",
+        "version": "v2.4.5",
+        "version_normalized": "2.4.5.0",
         "source": {
             "type": "git",
             "url": "https://github.com/nette/mail.git",
-            "reference": "fc651794923e0f44d6bd89afca4a16873c8f269c"
+            "reference": "13312eb627d913f2630018a07a9e40cb7003dc76"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/nette/mail/zipball/fc651794923e0f44d6bd89afca4a16873c8f269c",
-            "reference": "fc651794923e0f44d6bd89afca4a16873c8f269c",
+            "url": "https://api.github.com/repos/nette/mail/zipball/13312eb627d913f2630018a07a9e40cb7003dc76",
+            "reference": "13312eb627d913f2630018a07a9e40cb7003dc76",
             "shasum": ""
         },
         "require": {
@@ -752,7 +869,7 @@
         "suggest": {
             "ext-fileinfo": "to detect type of attached files"
         },
-        "time": "2017-12-05T11:26:49+00:00",
+        "time": "2018-03-18T16:30:02+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -849,17 +966,17 @@
     },
     {
         "name": "nette/php-generator",
-        "version": "v2.6.3",
-        "version_normalized": "2.6.3.0",
+        "version": "v2.6.4",
+        "version_normalized": "2.6.4.0",
         "source": {
             "type": "git",
             "url": "https://github.com/nette/php-generator.git",
-            "reference": "78c898808d3a1018cc81f9d7108bc645129776c8"
+            "reference": "c1f6b2163c5471c4d94cd94b93362f12bceef183"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/nette/php-generator/zipball/78c898808d3a1018cc81f9d7108bc645129776c8",
-            "reference": "78c898808d3a1018cc81f9d7108bc645129776c8",
+            "url": "https://api.github.com/repos/nette/php-generator/zipball/c1f6b2163c5471c4d94cd94b93362f12bceef183",
+            "reference": "c1f6b2163c5471c4d94cd94b93362f12bceef183",
             "shasum": ""
         },
         "require": {
@@ -873,7 +990,7 @@
             "nette/tester": "^2.0",
             "tracy/tracy": "^2.3"
         },
-        "time": "2017-07-14T07:06:27+00:00",
+        "time": "2018-04-26T16:47:39+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -902,8 +1019,14 @@
                 "homepage": "https://nette.org/contributors"
             }
         ],
-        "description": "Nette PHP Generator",
-        "homepage": "https://nette.org"
+        "description": "🐘 Nette PHP Generator: generates neat PHP code for you. Supports new PHP 7.1 features.",
+        "homepage": "https://nette.org",
+        "keywords": [
+            "code",
+            "nette",
+            "php",
+            "scaffolding"
+        ]
     },
     {
         "name": "nette/reflection",
@@ -1106,23 +1229,23 @@
     },
     {
         "name": "nette/tester",
-        "version": "v2.0.1",
-        "version_normalized": "2.0.1.0",
+        "version": "v2.0.2",
+        "version_normalized": "2.0.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/nette/tester.git",
-            "reference": "93f70b53f7b87b44334d98219302939eda2a423b"
+            "reference": "3f273cf0ef82939e5ed07baaa5cf21ea6f657fc2"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/nette/tester/zipball/93f70b53f7b87b44334d98219302939eda2a423b",
-            "reference": "93f70b53f7b87b44334d98219302939eda2a423b",
+            "url": "https://api.github.com/repos/nette/tester/zipball/3f273cf0ef82939e5ed07baaa5cf21ea6f657fc2",
+            "reference": "3f273cf0ef82939e5ed07baaa5cf21ea6f657fc2",
             "shasum": ""
         },
         "require": {
             "php": ">=5.6.0"
         },
-        "time": "2018-02-07T12:55:20+00:00",
+        "time": "2018-06-07T11:24:40+00:00",
         "bin": [
             "src/tester"
         ],
@@ -1170,17 +1293,17 @@
     },
     {
         "name": "nette/utils",
-        "version": "v2.5.1",
-        "version_normalized": "2.5.1.0",
+        "version": "v2.5.2",
+        "version_normalized": "2.5.2.0",
         "source": {
             "type": "git",
             "url": "https://github.com/nette/utils.git",
-            "reference": "8a85ce76298c8a8941f912b8fa3ee93ca17d2ebc"
+            "reference": "183069866dc477fcfbac393ed486aaa6d93d19a5"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/nette/utils/zipball/8a85ce76298c8a8941f912b8fa3ee93ca17d2ebc",
-            "reference": "8a85ce76298c8a8941f912b8fa3ee93ca17d2ebc",
+            "url": "https://api.github.com/repos/nette/utils/zipball/183069866dc477fcfbac393ed486aaa6d93d19a5",
+            "reference": "183069866dc477fcfbac393ed486aaa6d93d19a5",
             "shasum": ""
         },
         "require": {
@@ -1201,7 +1324,7 @@
             "ext-mbstring": "to use Strings::lower() etc...",
             "ext-xml": "to use Strings::length() etc. when mbstring is not available"
         },
-        "time": "2018-02-19T14:42:42+00:00",
+        "time": "2018-05-02T17:16:08+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -1253,18 +1376,169 @@
         ]
     },
     {
-        "name": "tracy/tracy",
-        "version": "v2.4.13",
-        "version_normalized": "2.4.13.0",
+        "name": "paragonie/random_compat",
+        "version": "v2.0.15",
+        "version_normalized": "2.0.15.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/nette/tracy.git",
-            "reference": "ead5141731a21cfd0710b092351d923549d2b2ad"
+            "url": "https://github.com/paragonie/random_compat.git",
+            "reference": "10bcb46e8f3d365170f6de9d05245aa066b81f09"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/nette/tracy/zipball/ead5141731a21cfd0710b092351d923549d2b2ad",
-            "reference": "ead5141731a21cfd0710b092351d923549d2b2ad",
+            "url": "https://api.github.com/repos/paragonie/random_compat/zipball/10bcb46e8f3d365170f6de9d05245aa066b81f09",
+            "reference": "10bcb46e8f3d365170f6de9d05245aa066b81f09",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.2.0"
+        },
+        "require-dev": {
+            "phpunit/phpunit": "4.*|5.*"
+        },
+        "suggest": {
+            "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
+        },
+        "time": "2018-06-08T15:26:40+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "files": [
+                "lib/random.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Paragon Initiative Enterprises",
+                "email": "security@paragonie.com",
+                "homepage": "https://paragonie.com"
+            }
+        ],
+        "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
+        "keywords": [
+            "csprng",
+            "polyfill",
+            "pseudorandom",
+            "random"
+        ]
+    },
+    {
+        "name": "psr/log",
+        "version": "1.0.2",
+        "version_normalized": "1.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/php-fig/log.git",
+            "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/php-fig/log/zipball/4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+            "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2016-10-10T12:19:37+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "1.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Psr\\Log\\": "Psr/Log/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "PHP-FIG",
+                "homepage": "http://www.php-fig.org/"
+            }
+        ],
+        "description": "Common interface for logging libraries",
+        "homepage": "https://github.com/php-fig/log",
+        "keywords": [
+            "log",
+            "psr",
+            "psr-3"
+        ]
+    },
+    {
+        "name": "setasign/fpdi",
+        "version": "1.6.2",
+        "version_normalized": "1.6.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Setasign/FPDI.git",
+            "reference": "a6ad58897a6d97cc2d2cd2adaeda343b25a368ea"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Setasign/FPDI/zipball/a6ad58897a6d97cc2d2cd2adaeda343b25a368ea",
+            "reference": "a6ad58897a6d97cc2d2cd2adaeda343b25a368ea",
+            "shasum": ""
+        },
+        "suggest": {
+            "setasign/fpdf": "FPDI will extend this class but as it is also possible to use \"tecnickcom/tcpdf\" as an alternative there's no fixed dependency configured.",
+            "setasign/fpdi-fpdf": "Use this package to automatically evaluate dependencies to FPDF.",
+            "setasign/fpdi-tcpdf": "Use this package to automatically evaluate dependencies to TCPDF."
+        },
+        "time": "2017-05-11T14:25:49+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "filters/",
+                "fpdi.php",
+                "fpdf_tpl.php",
+                "fpdi_pdf_parser.php",
+                "pdf_context.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Jan Slabon",
+                "email": "jan.slabon@setasign.com",
+                "homepage": "https://www.setasign.com"
+            }
+        ],
+        "description": "FPDI is a collection of PHP classes facilitating developers to read pages from existing PDF documents and use them as templates in FPDF. Because it is also possible to use FPDI with TCPDF, there are no fixed dependencies defined. Please see suggestions for packages which evaluates the dependencies automatically.",
+        "homepage": "https://www.setasign.com/fpdi",
+        "keywords": [
+            "fpdf",
+            "fpdi",
+            "pdf"
+        ]
+    },
+    {
+        "name": "tracy/tracy",
+        "version": "v2.5.0",
+        "version_normalized": "2.5.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/nette/tracy.git",
+            "reference": "534d4e4f0f31da494026a3761fad020c20b8debf"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/nette/tracy/zipball/534d4e4f0f31da494026a3761fad020c20b8debf",
+            "reference": "534d4e4f0f31da494026a3761fad020c20b8debf",
             "shasum": ""
         },
         "require": {
@@ -1279,11 +1553,11 @@
         "suggest": {
             "https://nette.org/donate": "Please support Tracy via a donation"
         },
-        "time": "2018-03-23T17:15:58+00:00",
+        "time": "2018-05-25T09:33:08+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
-                "dev-master": "2.4-dev"
+                "dev-master": "2.5-dev"
             }
         },
         "installation-source": "dist",

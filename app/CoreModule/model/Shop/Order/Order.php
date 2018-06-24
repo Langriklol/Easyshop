@@ -12,7 +12,18 @@ use App\CoreModule\Model\Shop\Product;
 use App\CoreModule\Model\Shop\ProductManager;
 use Nette;
 
-
+/**
+ * Class Order
+ * @package App\CoreModule\Model\Shop\Order
+ * @property int $id
+ * @property int $user
+ * @property string $name
+ * @property Product[] $products
+ * @property string $status
+ * @property string $description
+ * @property string $orderType
+ * @property string $createdAt
+ */
 class Order
 {
     use Nette\SmartObject;
@@ -117,9 +128,9 @@ class Order
     }
 
     /**
-     * @return int
+     * @return string
      */
-    public function getStatus(): int
+    public function getStatus(): string
     {
         return $this->status;
     }

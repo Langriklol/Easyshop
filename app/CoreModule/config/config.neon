@@ -4,4 +4,5 @@ parameters:
 services:
     - App\CoreModule\Model\Shop\ProductManager
     - App\CoreModule\Model\Shop\ProductFactory
+    - App\CoreModule\Model\Shop\Order\OrderManager
     - App\Forms\AdministrationFormFactory

@@ -9,10 +9,47 @@ class ComposerStaticInit0f212645cfc93e28d34c7dc8d0b4bd60
     public static $files = array (
         '7745382c92b7799bf1294b1f43023ba2' => __DIR__ . '/..' . '/tracy/tracy/src/shortcuts.php',
         'a12da592622097d2b593a430e32e13fd' => __DIR__ . '/..' . '/nette/utils/src/loader.php',
+        '6124b4c8570aa390c21fafd04a26c69f' => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy/deep_copy.php',
         'e7a6fd2e7a869bb207158e9416bdd9b0' => __DIR__ . '/..' . '/nette/application/src/compatibility.php',
+        '5255c38a0faeba867671b61dfda6d864' => __DIR__ . '/..' . '/paragonie/random_compat/lib/random.php',
+    );
+
+    public static $prefixLengthsPsr4 = array (
+        'P' => 
+        array (
+            'Psr\\Log\\' => 8,
+        ),
+        'M' => 
+        array (
+            'Mpdf\\' => 5,
+        ),
+        'D' => 
+        array (
+            'DeepCopy\\' => 9,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
+        'Mpdf\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mpdf/mpdf/src',
+        ),
+        'DeepCopy\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
+        ),
     );
 
     public static $classMap = array (
+        'FPDF_TPL' => __DIR__ . '/..' . '/setasign/fpdi/fpdf_tpl.php',
+        'FPDI' => __DIR__ . '/..' . '/setasign/fpdi/fpdi.php',
+        'FilterASCII85' => __DIR__ . '/..' . '/setasign/fpdi/filters/FilterASCII85.php',
+        'FilterASCIIHexDecode' => __DIR__ . '/..' . '/setasign/fpdi/filters/FilterASCIIHexDecode.php',
+        'FilterLZW' => __DIR__ . '/..' . '/setasign/fpdi/filters/FilterLZW.php',
         'Latte\\CompileException' => __DIR__ . '/..' . '/latte/latte/src/Latte/exceptions.php',
         'Latte\\Compiler' => __DIR__ . '/..' . '/latte/latte/src/Latte/Compiler/Compiler.php',
         'Latte\\Engine' => __DIR__ . '/..' . '/latte/latte/src/Latte/Engine.php',
@@ -361,6 +398,8 @@ class ComposerStaticInit0f212645cfc93e28d34c7dc8d0b4bd60
         'Tester\\TestCaseException' => __DIR__ . '/..' . '/nette/tester/src/Framework/TestCase.php',
         'Tracy\\Bar' => __DIR__ . '/..' . '/tracy/tracy/src/Tracy/Bar.php',
         'Tracy\\BlueScreen' => __DIR__ . '/..' . '/tracy/tracy/src/Tracy/BlueScreen.php',
+        'Tracy\\Bridges\\Nette\\Bridge' => __DIR__ . '/..' . '/tracy/tracy/src/Bridges/Nette/Bridge.php',
+        'Tracy\\Bridges\\Nette\\MailSender' => __DIR__ . '/..' . '/tracy/tracy/src/Bridges/Nette/MailSender.php',
         'Tracy\\Bridges\\Nette\\TracyExtension' => __DIR__ . '/..' . '/tracy/tracy/src/Bridges/Nette/TracyExtension.php',
         'Tracy\\Debugger' => __DIR__ . '/..' . '/tracy/tracy/src/Tracy/Debugger.php',
         'Tracy\\DefaultBarPanel' => __DIR__ . '/..' . '/tracy/tracy/src/Tracy/DefaultBarPanel.php',
@@ -371,11 +410,15 @@ class ComposerStaticInit0f212645cfc93e28d34c7dc8d0b4bd60
         'Tracy\\ILogger' => __DIR__ . '/..' . '/tracy/tracy/src/Tracy/ILogger.php',
         'Tracy\\Logger' => __DIR__ . '/..' . '/tracy/tracy/src/Tracy/Logger.php',
         'Tracy\\OutputDebugger' => __DIR__ . '/..' . '/tracy/tracy/src/Tracy/OutputDebugger.php',
+        'fpdi_pdf_parser' => __DIR__ . '/..' . '/setasign/fpdi/fpdi_pdf_parser.php',
+        'pdf_context' => __DIR__ . '/..' . '/setasign/fpdi/pdf_context.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixLengthsPsr4 = ComposerStaticInit0f212645cfc93e28d34c7dc8d0b4bd60::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit0f212645cfc93e28d34c7dc8d0b4bd60::$prefixDirsPsr4;
             $loader->classMap = ComposerStaticInit0f212645cfc93e28d34c7dc8d0b4bd60::$classMap;
 
         }, null, ClassLoader::class);

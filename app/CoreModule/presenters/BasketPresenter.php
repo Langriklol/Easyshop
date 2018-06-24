@@ -8,7 +8,7 @@
 
 namespace App\CoreModule\Presenters;
 
-use App\CoreModule\Model\ProductManager;
+use App\CoreModule\Model\Shop\ProductManager;
 use App\Presenters\BasePresenter;
 use Nette;
 

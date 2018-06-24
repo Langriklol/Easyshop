@@ -5,7 +5,7 @@ namespace App\CoreModule\Presenters;
 use App\CoreModule\Model\Shop\Product;
 use App\Forms\AdministrationFormFactory;
 use App\Presenters\BasePresenter;
-use App\CoreModule\Model\ProductManager;
+use App\CoreModule\Model\Shop\ProductManager;
 use http\Exception\BadUrlException;
 use Nette\Application\BadRequestException;
 use Nette\Utils\ArrayHash;

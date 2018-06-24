@@ -8,7 +8,7 @@
 
 namespace App\Forms;
 
-use App\CoreModule\Model\ProductManager;
+use App\CoreModule\Model\Shop\ProductManager;
 use Nette\Application\UI\Form;
 
 class AdministrationFormFactory
@@ -77,6 +77,20 @@ class AdministrationFormFactory
             ->setRequired();
         $form->addSubmit('add', 'Add product');
         $form->onSuccess[] = [$this, 'productFormSucceeded'];
+        return $form;
+    }
+
+    public function createNewOrderForm(): Form
+    {
+        $form = new Form();
+        $form->addText('name', 'Order name')
+            ->setRequired();
+        $form->addText('products', 'Products ID')
+            ->setRequired();
+        $form->addText('description', 'Description')
+            ->addRule(Form::MAX_LENGTH, 'Description length must be less or equal 255 characters', 255);
+
+
         return $form;
     }
 }

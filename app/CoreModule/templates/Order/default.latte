@@ -1,4 +1,13 @@
-{foreach $orders as $order}
-    <h1>Order: {$order->name}</h1>
-    <b>Issued at: {$order->created_at}</b>
+<h1>Order: {$order->id}: {$order->name}</h1>
+<h2>Status: {$order->status}</h2>
+<h2>Type: {$order->orderType}</h2>
+<h2>From: {$order->createdAt}</h2>
+<i>Description: {$order->description}</i>
+<h3>Products</h3>
+{foreach $order->products as $product}
+    <div class="product">
+        <img height="200" width="200" src="{$basePath}/{$product->getImage()}" alt="{$product->getName()} thumbnail" />
+        <h2>{$product->getName()}</h2>
+        <i>{$product->getDescription()}</i> <b>{$product->getPrice()} €</b><br/>
+    </div>
 {/foreach}

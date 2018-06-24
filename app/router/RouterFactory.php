@@ -33,6 +33,7 @@ class RouterFactory
             ]
         ]);
         $router[] = new Route('<action>', 'Core:Product:list');
+
         $router[] = new Route('basket/<action>/[<id>]', [
             'presenter' => 'Core:Basket',
             'action' => [
@@ -42,7 +43,9 @@ class RouterFactory
                 ],
             ]
         ]);
-        $router[] = new Route('order/[<id>]/[<action>]', [
+
+        $router[] = new Route('order/<id>', 'Core:Order:default');
+        $router[] = new Route('order/<id>/<action>', [
             'presenter' => 'Core:Order',
             'action' => [
                 Route::VALUE => 'default',

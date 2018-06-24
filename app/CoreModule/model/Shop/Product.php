@@ -3,9 +3,23 @@
 namespace App\CoreModule\Model\Shop;
 
 use Nette\Utils\ArrayHash;
+use Nette;
 
+/**
+ * Class Product
+ * @package App\CoreModule\Model\Shop
+ * @property int $id
+ * @property string $name
+ * @property string $manufacturer
+ * @property string $category
+ * @property float $price
+ * @property string $description
+ * @property string $image
+ * @property string $availability
+ */
 class Product
 {
+    use Nette\SmartObject;
     const AVAILABLE = 'Available',
         WAITING = 'Waiting',
         UNAVAILABLE = 'Unavailable';
@@ -31,7 +45,7 @@ class Product
     private $category;
 
     /**
-     * @var int $price product price
+     * @var float $price product price
      */
     private $price;
     
@@ -46,7 +60,7 @@ class Product
     private $image;
 
     /**
-     * @var int $availability Availability of product
+     * @var string $availability Availability of product
      */
     private $availability;
 
@@ -73,18 +87,18 @@ class Product
     }
 
     /**
-     * @return int
+     * @return float
      */
-    public function getPrice(): int
+    public function getPrice(): float
     {
         return $this->price;
     }
 
     /**
-     * @param int $price
+     * @param float $price
      * @return Product
      */
-    public function setPrice(int $price): Product
+    public function setPrice(float $price): Product
     {
         $this->price = $price;
         return $this;
