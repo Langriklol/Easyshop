@@ -9,6 +9,7 @@
 namespace App\CoreModule\Model\Shop;
 use Nette;
 use Nette\Utils\ArrayHash;
+use Langriklol\Utils\ProductSortHelper;
 
 class Basket
 {
@@ -17,9 +18,16 @@ class Basket
      */
     protected $products;
 
-    public function __construct()
+    /**
+     * @var ProductSortHelper
+     */
+    private $sortHelper;
+
+    public function __construct(ProductSortHelper $sortHelper)
     {
         $this->products = [];
+
+        $this->sortHelper = $sortHelper;
     }
 
     /**
@@ -72,34 +80,6 @@ class Basket
      */
     public function renderProductFrontend(): ArrayHash
     {
-        $productCount = [];
-        $productIndexer = [];
-        if($this->products) {
-            foreach ($this->products as $product) {
-                if(isset($productCount[$product->getId()]) && $productCount[$product->getId()])
-                    $productCount[$product->getId()]++;
-                else
-                    $productCount[$product->getId()] = 1;
-            }
-            $productFrontend = [];
-            foreach ($this->products as $product) {
-                if(!isset($productIndexer[$product->getId()])) {
-                    $productFrontend[] = [
-                        'id' => $product->getId(),
-                        'name' => $product->getName(),
-                        'description' => $product->getDescription(),
-                        'category' => $product->getCategory(),
-                        'manufacturer' => $product->getManufacturer(),
-                        'price' => $product->getPrice(),
-                        'availability' => $product->getAvailability(),
-                        'image' => $product->getImage(),
-                        'count' => $productCount[$product->getId()]
-                    ];
-                    $productIndexer[$product->getId()] = 1;
-                }
-            }
-            return ArrayHash::from($productFrontend);
-        }
-        return ArrayHash::from([]);
+        $this->sortHelper->sortProductFrontEnd($this->products);
     }
 }

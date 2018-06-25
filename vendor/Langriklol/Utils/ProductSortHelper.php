@@ -13,6 +13,10 @@ use App\CoreModule\Model\Shop\Product;
 
 class ProductSortHelper
 {
+    /**
+     * @param Product[]|array $products
+     * @return ArrayHash
+     */
     public function sortProductFrontEnd(array $products): ArrayHash
     {
         $productCount = [];
