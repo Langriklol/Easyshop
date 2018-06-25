@@ -11,8 +11,16 @@ forms:
         messages:
                 REQUIRED: 'Required field.'
 
+di:
+    debugger: true
+
+php:
+        date.timezone: Europe/Prague
+
 session:
 	expiration: 30 minutes
+	debugger: true
+
 database:
 	dsn: 'mysql:host=127.0.0.1;dbname=eshop'
 	user: root

@@ -24,11 +24,21 @@ class OrderPresenter extends BasePresenter
         $this->orderManager =  $orderManager;
     }
 
-    public function renderDefault(int $id)
+    /**
+     * @param int $id
+     * @throws \Nette\Application\AbortException
+     */
+    public function renderDefault(int $id = null)
     {
-        $order = $this->orderManager->getOrder($id);
-        bdump($order, 'Order');
-        $this->template->order = $order;
+        if($id) {
+            $order = $this->orderManager->getOrder($id);
+            $order->setProducts($this->orderManager->renderOrderProductFrontEnd($order));
+            bdump($order, 'Frontended order');
+            $this->template->order = $order;
+        }else{
+            $this->flashMessage('Missing order id');
+            $this->redirect('Product:list');
+        }
     }
 
     public function renderList()

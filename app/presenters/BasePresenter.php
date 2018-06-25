@@ -29,7 +29,7 @@ abstract class BasePresenter extends Presenter
        $this->session->basket = ($this->session->basket instanceof Basket) ? $this->session->basket : new Basket();
        $this->basket = &$this->session->basket;
        $this->template->basketItemCount = count($this->basket->getProducts());
-       bdump($this->basket);
+       bdump($this->basket, 'Basket');
    }
 
 }

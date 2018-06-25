@@ -6,8 +6,8 @@
 <h3>Products</h3>
 {foreach $order->products as $product}
     <div class="product">
-        <img height="200" width="200" src="{$basePath}/{$product->getImage()}" alt="{$product->getName()} thumbnail" />
-        <h2>{$product->getName()}</h2>
-        <i>{$product->getDescription()}</i> <b>{$product->getPrice()} €</b><br/>
+        <img height="100" width="100" src="{$basePath}/{$product->image}" alt="{$product->name} thumbnail" />
+        <b>{$product->name}</b>
+        <i>{$product->description}</i> <b>{$product->price * $product->count} €</b> <i>({$product->count} ks)</i><br/>
     </div>
 {/foreach}

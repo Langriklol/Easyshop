@@ -10,6 +10,7 @@ namespace App\CoreModule\Model\Shop\Order;
 
 use App\CoreModule\Model\Shop\Product;
 use App\CoreModule\Model\Shop\ProductManager;
+use Nette\Utils\ArrayHash;
 use Nette;
 
 /**
@@ -18,7 +19,7 @@ use Nette;
  * @property int $id
  * @property int $user
  * @property string $name
- * @property Product[] $products
+ * @property Product[]|ArrayHash $products
  * @property string $status
  * @property string $description
  * @property string $orderType
@@ -110,19 +111,19 @@ class Order
     }
 
     /**
-     * @param Product[] $products
+     * @param Product[]|ArrayHash $products
      * @return Order
      */
-    public function setProducts(array $products): Order
+    public function setProducts($products): Order
     {
         $this->products = $products;
         return $this;
     }
 
     /**
-     * @return Product[]
+     * @return Product[]|ArrayHash
      */
-    public function getProducts(): array
+    public function getProducts()
     {
         return $this->products;
     }

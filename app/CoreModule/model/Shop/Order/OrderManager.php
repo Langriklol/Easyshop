@@ -12,20 +12,24 @@ use App\CoreModule\Model\Shop\ProductManager;
 use App\Model\BaseManager;
 use Nette\Database\Context;
 use Nette\Utils\ArrayHash;
+use Langriklol\Utils\ProductSortHelper;
 
 class OrderManager extends BaseManager
 {
     private $productManager;
+    private $sortHelper;
 
     /**
      * OrderManager constructor.
      * @param Context $context
      * @param ProductManager $productManager
+     * @param ProductSortHelper $sortHelper
      */
-    public function __construct(Context $context, ProductManager $productManager)
+    public function __construct(Context $context, ProductManager $productManager, ProductSortHelper $sortHelper)
     {
         parent::__construct($context);
         $this->productManager = $productManager;
+        $this->sortHelper = $sortHelper;
     }
 
     /**
@@ -78,5 +82,10 @@ class OrderManager extends BaseManager
             $productArray[] = $this->productManager->getProduct($product);
         }
         return $productArray;
+    }
+
+    public function renderOrderProductFrontEnd(Order $order): ArrayHash
+    {
+        return $this->sortHelper->sortProductFrontEnd($order->products);
     }
 }

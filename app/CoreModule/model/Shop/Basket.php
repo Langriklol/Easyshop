@@ -19,6 +19,7 @@ class Basket
 
     public function __construct()
     {
+        $this->products = [];
     }
 
     /**
@@ -46,7 +47,11 @@ class Basket
      */
     public function addProduct(Product $product): Basket
     {
-        $this->products[] = $product;
+        if(empty($this->products)){
+            $this->products[0] = $product;
+        }else{
+            $this->products[] = $product;
+        }
         return $this;
     }
 
@@ -71,7 +76,7 @@ class Basket
         $productIndexer = [];
         if($this->products) {
             foreach ($this->products as $product) {
-                if(isset($productCount[$product->getId()]))
+                if(isset($productCount[$product->getId()]) && $productCount[$product->getId()])
                     $productCount[$product->getId()]++;
                 else
                     $productCount[$product->getId()] = 1;

@@ -1,8 +1,10 @@
 parameters:
     product: Core:Product
+    order: Core:Order
 
 services:
     - App\CoreModule\Model\Shop\ProductManager
     - App\CoreModule\Model\Shop\ProductFactory
     - App\CoreModule\Model\Shop\Order\OrderManager
+    - Langriklol\Utils\ProductSortHelper
     - App\Forms\AdministrationFormFactory
