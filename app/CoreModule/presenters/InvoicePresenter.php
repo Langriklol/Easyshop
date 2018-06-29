@@ -43,7 +43,8 @@ class InvoicePresenter extends BasePresenter
     public function renderDefault(int $id)
     {
         $order = $this->orderManager->getOrder($id);
+        $order->setProducts($this->orderManager->renderOrderProductFrontEnd($order));
         $invoiceManager = new InvoiceManager($this->db, $order);
-        $invoiceManager->makeTemplate()->makeInvoice()->export();
+        $invoiceManager->makeInvoice()->makeTemplate()->export();
     }
 }

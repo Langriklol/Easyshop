@@ -6,7 +6,7 @@
  * Time: 5:30 PM
  */
 
-namespace App\CoreModule\Model\Shop\Invoice;
+namespace App\CoreModule\model\Shop\Invoice;
 
 use App\CoreModule\Model\Shop\Order\Order;
 use Nette\Utils\ArrayHash;

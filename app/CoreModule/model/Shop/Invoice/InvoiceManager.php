@@ -53,6 +53,7 @@ class InvoiceManager extends BaseManager
     public function makeInvoice(): InvoiceManager
     {
         $this->invoice = new Invoice($this->order, $this->findClient($this->order->user));
+        bdump($this->invoice);
         return $this;
     }
 
@@ -78,11 +79,15 @@ class InvoiceManager extends BaseManager
     {
         $latte = new Latte\Engine;
         $client = $this->findClient($this->order->getUser());
+        bdump($this->invoice, 'invoice');
+        bdump($this->order, 'order');
+        bdump($client, 'client');
         $params = [
             'order' => $this->invoice->getOrder(),
             'client' => $client
         ];
-        $this->html = $latte->renderToString('../../../templates/Invoice/invoice.latte', $params);
+        bdump( __DIR__);
+        $this->html = $latte->renderToString(__DIR__ .'/../../../templates/Invoice/invoice.latte', $params);
         return $this;
     }
 }
