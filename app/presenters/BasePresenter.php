@@ -2,6 +2,7 @@
 
 namespace App\Presenters;
 
+use Langriklol\Utils\ProductSortHelper;
 use Nette\Application\UI\Presenter;
 use App\CoreModule\Model\Shop\Basket;
 use Nette;
@@ -17,7 +18,7 @@ abstract class BasePresenter extends Presenter
    */
    protected $session;
 
-   /**
+    /**
    * @var Basket
    */
    protected $basket;

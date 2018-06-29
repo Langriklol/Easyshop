@@ -7,7 +7,7 @@
  */
 
 namespace App\CoreModule\Model\Shop;
-use Nette;
+
 use Nette\Utils\ArrayHash;
 use Langriklol\Utils\ProductSortHelper;
 
@@ -23,14 +23,14 @@ class Basket
      */
     private $sortHelper;
 
-    public function __construct(ProductSortHelper $sortHelper)
+    public function __construct()
     {
         $this->products = [];
-
-        $this->sortHelper = $sortHelper;
+        $this->sortHelper = new ProductSortHelper();
     }
 
     /**
+     * Simple product getter
      * @return Product[] products in basket
      */
     public function getProducts(): array
@@ -63,6 +63,10 @@ class Basket
         return $this;
     }
 
+    /**
+     * Removes product from basket
+     * @param Product $product
+     */
     public function removeProduct(Product $product)
     {
         foreach ($this->products as $key => $item)

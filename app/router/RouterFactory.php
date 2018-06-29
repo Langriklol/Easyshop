@@ -45,6 +45,8 @@ class RouterFactory
             ]
         ]);
 
+        $router[] = new Route('invoice[/<id>]', 'Core:Invoice:default');
+
         $router[] = new Route('order[/<id>]', 'Core:Order:default');
         $router[] = new Route('order/<id>/<action>', [
             'presenter' => 'Core:Order',

@@ -1,6 +1,7 @@
 parameters:
     product: Core:Product
     order: Core:Order
+    invoice: Core:Invoice
 
 services:
     - App\CoreModule\Model\Shop\ProductManager

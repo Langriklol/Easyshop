@@ -1,0 +1,79 @@
+<html>
+    <body>
+        <h1>Invoice no {$order->id}. {$order->name}</h1>
+        <table>
+            <thead>
+                <tr>
+                    <td>Client</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Name </td><td>{$client->name}</td>
+                </tr>
+                {if $client->ico}
+                    <tr>
+                        <td>ICO </td><td>{$client->ico}</td>
+                    </tr>
+                {/if}
+                <tr>
+                    <td>Email</td><td>{$client->email}</td>
+                </tr>
+                {if $client->phone}
+                    <tr>
+                        <td>Phone number </td><td>{$client->phone}</td>
+                    </tr>
+                {/if}
+                <tr>
+                    <td>Residence</td><td>{$client->residence}</td>
+                </tr>
+            </tbody>
+        </table>
+        <table>
+            <thead>
+                <tr>
+                    <td>Eshop</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Name </td><td>Company name</td>
+                </tr>
+                <tr>
+                    <td>ICO </td><td>Company trade number</td>
+                </tr>
+                <tr>
+                    <td>Email </td><td>company@email.com</td>
+                </tr>
+                <tr>
+                    <td>Residence </td><td>Residence address</td>
+                </tr>
+            </tbody>
+        </table>
+        <h2>Product bill</h2>
+        <table>
+            <thead>
+                <tr>
+                     <td>ID</td>
+                    <td>Name</td>
+                    <td>Description</td>
+                    <td>Count</td>
+                    <td>Price</td>
+                    <td>Total</td>
+                </tr>
+            </thead>
+            <tbody>
+            {foreach $order->products as $product}
+                <tr>
+                    <td>{$product->id}</td>
+                    <td>{$product->name}</td>
+                    <td>{$product->description}</td>
+                    <td>{$product->count}</td>
+                    <td>{$product->price}</td>
+                    <td>{$product->count * $product->price}</td>
+                </tr>
+            {/foreach}
+            </tbody>
+        </table>
+    </body>
+</html>
