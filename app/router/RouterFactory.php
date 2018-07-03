@@ -34,6 +34,7 @@ class RouterFactory
         ]);
 
         $router[] = new Route('products', 'Core:Product:list');
+        $router[] = new Route('<presenter>/<action>[/<id>]', 'Core:Product:list');
 
         $router[] = new Route('basket/<action>/[<id>]', [
             'presenter' => 'Core:Basket',

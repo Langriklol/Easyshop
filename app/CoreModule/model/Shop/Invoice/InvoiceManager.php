@@ -14,7 +14,7 @@ use Mpdf\Mpdf;
 use Nette;
 use Latte;
 use Nette\Database\Context;
-use Nette\Mail\SmtpMailer;
+use Nette\Mail\SendmailMailer;
 use Nette\Mail\Message;
 use Nette\Utils\ArrayHash;
 
@@ -59,7 +59,16 @@ class InvoiceManager extends BaseManager
 
     public function send()
     {
-        
+        $client = $this->findClient($this->order->user);
+
+        $mail = new Message();
+        $mail->setFrom('Eshop shop@testshop.com')
+            ->addTo($client->email)
+            ->setSubject('Order confirmation')
+            ->setHtmlBody($this->makeMailBody());
+
+        $mailer = new SendmailMailer();
+        $mailer->send($mail);
     }
 
     /**
@@ -89,5 +98,11 @@ class InvoiceManager extends BaseManager
         bdump( __DIR__);
         $this->html = $latte->renderToString(__DIR__ .'/../../../templates/Invoice/invoice.latte', $params);
         return $this;
+    }
+
+    private function makeMailBody(array $params = null)
+    {
+        $latte = new Latte\Engine;
+        return $latte->renderToString(__DIR__ .'/../../../templates/Invoice/email.latte', $params);
     }
 }
