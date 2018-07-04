@@ -8,8 +8,10 @@
 
 namespace App\CoreModule\Presenters;
 
+use App\CoreModule\Model\Shop\Order\Order;
 use App\CoreModule\Model\Shop\Order\OrderManager;
 use App\Presenters\BasePresenter;
+use Nette\Utils\ArrayHash;
 
 class OrderPresenter extends BasePresenter
 {
@@ -46,6 +48,22 @@ class OrderPresenter extends BasePresenter
         $this->template->orders = $this->orderManager->getOrders();
     }
 
+    public function actionMake()
+    {
+        $products = '';
+        foreach ($this->basket->getProducts() as $product)
+        {
+            $products = $product ? ',' . $product->id : $product->id;
+        }
 
+        $order = [
+            'id' => null,
+            'name' => '',
+            'products' => $products,
+            'status' => Order::PENDING_STATUS,
+            'orderType' => Order::TYPE_CASH_ON_DELIVERY
+        ];
 
+        $this->orderManager->makeOrder(ArrayHash::from($order));
+    }
 }

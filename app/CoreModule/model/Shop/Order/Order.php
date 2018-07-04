@@ -29,9 +29,13 @@ class Order
 {
     use Nette\SmartObject;
 
-    const PENDING = 'pending',
-        CANCELED = 'canceled',
-        DONE = 'done';
+    const PENDING_STATUS = 'pending',
+        CANCELED_STATUS = 'canceled',
+        DONE_STATUS = 'done';
+
+    const TYPE_PAID = 'paid',
+        TYPE_CASH_ON_DELIVERY = 'cash on delivery';
+
     const TABLE = 'order',
         ID = 'id';
 

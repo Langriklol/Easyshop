@@ -61,6 +61,7 @@ class OrderManager extends BaseManager
         }
         return $orders;
     }
+
     public function makeOrder(ArrayHash $order)
     {
         return $this->db->table(Order::TABLE)->insert($order);
@@ -70,7 +71,7 @@ class OrderManager extends BaseManager
     {
         $order = $this->db->table(Order::TABLE)->get($orderId);
         $order = $order->toArray();
-        $order['status'] = Order::CANCELED;
+        $order['status'] = Order::CANCELED_STATUS;
         return $this->db->table(Order::TABLE)->where(Order::ID, $orderId)->update($order);
     }
 
@@ -87,5 +88,10 @@ class OrderManager extends BaseManager
     public function renderOrderProductFrontEnd(Order $order): ArrayHash
     {
         return $this->sortHelper->sortProductFrontEnd($order->products);
+    }
+
+    public function storeProducts(array $products)
+    {
+        
     }
 }
