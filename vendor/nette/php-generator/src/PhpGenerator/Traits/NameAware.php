@@ -5,6 +5,8 @@
  * Copyright (c) 2004 David Grudl (https://davidgrudl.com)
  */
 
+declare(strict_types=1);
+
 namespace Nette\PhpGenerator\Traits;
 
 use Nette;
@@ -19,10 +21,7 @@ trait NameAware
 	private $name;
 
 
-	/**
-	 * @param  string
-	 */
-	public function __construct($name)
+	public function __construct(string $name)
 	{
 		if (!Nette\PhpGenerator\Helpers::isIdentifier($name)) {
 			throw new Nette\InvalidArgumentException("Value '$name' is not valid name.");
@@ -31,19 +30,7 @@ trait NameAware
 	}
 
 
-	/** @deprecated */
-	public function setName($name)
-	{
-		trigger_error(__METHOD__ . '() is deprecated, use constructor.', E_USER_DEPRECATED);
-		$this->__construct($name);
-		return $this;
-	}
-
-
-	/**
-	 * @return string
-	 */
-	public function getName()
+	public function getName(): string
 	{
 		return $this->name;
 	}

@@ -62,8 +62,24 @@ class OrderManager extends BaseManager
         return $orders;
     }
 
-    public function makeOrder(ArrayHash $order)
+    public function makeOrder(int $user, array $products, string $status, string $orderType, string $description, string $name = null)
     {
+        $productArray = '';
+
+        foreach ($products as $product)
+        {
+            $productArray = $product ? ',' . $product->id : $product->id;
+        }
+
+        $order = [
+            'name' => $name,
+            'user' => $user,
+            'products' => $productArray,
+            'description' => $description,
+            'status' => $status,
+            'orderType' => $orderType
+        ];
+
         return $this->db->table(Order::TABLE)->insert($order);
     }
 

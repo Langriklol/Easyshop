@@ -16,8 +16,10 @@ use Nette\Utils\ArrayHash;
 
 class UserFormFactory
 {
+    /** @var User $user */
     private $user;
 
+    /** @param User $user */
     public function __construct(User $user)
     {
         $this->user = $user;
@@ -27,6 +29,7 @@ class UserFormFactory
      * @param Form $form
      * @param null|ArrayHash $instructions
      * @param bool $register
+     * @throws \Nette\Application\AbortException
      */
     private function login(Form $form, ArrayHash $instructions = null, bool $register = false)
     {
@@ -57,6 +60,9 @@ class UserFormFactory
         }
     }
 
+    /** @param Form $form
+     * @return Form
+     */
     public function createBasicForm(Form $form = null)
     {
         $form = $form ? $form : new Form();

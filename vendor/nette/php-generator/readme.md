@@ -2,8 +2,8 @@ Nette PHP Generator
 ===================
 
 [![Downloads this Month](https://img.shields.io/packagist/dm/nette/php-generator.svg)](https://packagist.org/packages/nette/php-generator)
-[![Build Status](https://travis-ci.org/nette/php-generator.svg?branch=v2.6)](https://travis-ci.org/nette/php-generator)
-[![Coverage Status](https://coveralls.io/repos/github/nette/php-generator/badge.svg?branch=v2.6)](https://coveralls.io/github/nette/php-generator?branch=v2.6)
+[![Build Status](https://travis-ci.org/nette/php-generator.svg?branch=master)](https://travis-ci.org/nette/php-generator)
+[![Coverage Status](https://coveralls.io/repos/github/nette/php-generator/badge.svg?branch=master&v=1)](https://coveralls.io/github/nette/php-generator?branch=master)
 [![Latest Stable Version](https://poser.pugx.org/nette/php-generator/v/stable)](https://github.com/nette/php-generator/releases)
 [![License](https://img.shields.io/badge/license-New%20BSD-blue.svg)](https://github.com/nette/php-generator/blob/master/license.md)
 
@@ -24,6 +24,11 @@ The recommended way to install is via Composer:
 ```
 composer require nette/php-generator
 ```
+
+- v2.6 requires PHP 5.6 or newer (is compatible up to 7.2)
+- v3.0 requires PHP 7.0 or newer (is compatible up to 7.2)
+- v3.1 requires PHP 7.1 or newer (is compatible up to 7.2)
+
 
 Usage
 -----

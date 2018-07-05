@@ -8,6 +8,7 @@
 
 namespace App\Forms;
 
+use App\CoreModule\Model\Shop\Order\Order;
 use App\CoreModule\Model\Shop\ProductManager;
 use Nette\Application\UI\Form;
 
@@ -26,6 +27,7 @@ class AdministrationFormFactory
     /**
      * @param $form
      * @param $values
+     * @throws \Nette\Application\AbortException
      */
     public function productFormSucceeded(Form $form, $values)
     {
@@ -83,14 +85,14 @@ class AdministrationFormFactory
     public function createNewOrderForm(): Form
     {
         $form = new Form();
-        $form->addText('name', 'Order name')
-            ->setRequired();
-        $form->addText('products', 'Products ID')
-            ->setRequired();
+        $form->addText('name', 'Order name');
+        $form->addSelect('delivery', 'Delivery', [
+            Order::TYPE_CASH_ON_DELIVERY => 'Cash on delivery',
+            Order::TYPE_PAID => 'Payment in advance'
+        ]);
+        $form['country']->setDefaultValue(Order::TYPE_CASH_ON_DELIVERY);
         $form->addText('description', 'Description')
             ->addRule(Form::MAX_LENGTH, 'Description length must be less or equal 255 characters', 255);
-
-
         return $form;
     }
 }

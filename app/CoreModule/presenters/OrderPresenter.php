@@ -48,22 +48,8 @@ class OrderPresenter extends BasePresenter
         $this->template->orders = $this->orderManager->getOrders();
     }
 
-    public function actionMake()
+    public function actionMake($description, $name)
     {
-        $products = '';
-        foreach ($this->basket->getProducts() as $product)
-        {
-            $products = $product ? ',' . $product->id : $product->id;
-        }
-
-        $order = [
-            'id' => null,
-            'name' => '',
-            'products' => $products,
-            'status' => Order::PENDING_STATUS,
-            'orderType' => Order::TYPE_CASH_ON_DELIVERY
-        ];
-
-        $this->orderManager->makeOrder(ArrayHash::from($order));
+        $this->orderManager->makeOrder((int)$this->user-getId(), $this->basket->getProducts(), Order::PENDING_STATUS, Order::TYPE_CASH_ON_DELIVERY, $description, $name);
     }
 }
