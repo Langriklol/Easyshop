@@ -31,7 +31,7 @@ class AuthPresenter extends BasePresenter
         parent::startup();
         $this->instructions = [
             'message' => null,
-            'redirection' => 'Core:Auth:'
+            'redirection' => ':Core:Auth:'
         ];
     }
 

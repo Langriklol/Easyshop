@@ -60,11 +60,8 @@ class BasketPresenter extends BasePresenter
      */
     public function renderDefault()
     {
-        $product = $this->productManager->getProduct(6);
+        //$product = $this->productManager->getProduct(6);
         //$this->basket->addProduct($product);
-        bdump($this->basket->renderProductFrontend());
         $this->template->products = $this->basket->renderProductFrontend();
-        $request = $this->getHttpRequest();
-        bdump($request->getRemoteHost());
     }
 }
