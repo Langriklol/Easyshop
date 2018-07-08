@@ -48,6 +48,14 @@ class BasketPresenter extends BasePresenter
     }
 
     /**
+     * @throws Nette\Application\AbortException
+     */
+    public function actionOrder()
+    {
+        $this->redirect('Order:default');
+    }
+    
+    /**
      *  Render basket front end
      */
     public function renderDefault()

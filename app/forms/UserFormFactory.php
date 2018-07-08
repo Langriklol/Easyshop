@@ -35,7 +35,7 @@ class UserFormFactory
     {
         $presenter = $form->getPresenter();
         try{
-            $username = $form->getValues()->username;
+            $username = $form->getValues()->email;
             $password = $form->getValues()->password;
 
             if ($register)
@@ -66,7 +66,8 @@ class UserFormFactory
     public function createBasicForm(Form $form = null)
     {
         $form = $form ? $form : new Form();
-        $form->addText('nickname', 'Jméno')
+        $form->addText('email', 'Email')
+            ->addRule(Form::EMAIL, 'Invalid email format')
             ->setRequired();
         $form->addPassword('password', 'Heslo')
             ->setRequired();
@@ -81,7 +82,7 @@ class UserFormFactory
     public function createLoginForm($instructions = null, Form $form = null)
     {
         $form = $this->createBasicForm($form);
-        $form->addSubmit('submit', 'Přihlásit');
+        $form->addSubmit('submit', 'Sign in');
         $form->onSuccess[] = function (Form $form) use ($instructions){
             $this->login($form, $instructions);
         };
@@ -96,8 +97,8 @@ class UserFormFactory
     public function createRegisterForm(ArrayHash $instructions = null, Form $form = null)
     {
         $form = $this->createBasicForm($form);
-        $form->addPassword('password_repeat', 'Zopakujde heslo')
-            ->addRule(Form::EQUAL, 'Hesla se neshodují.', $form['password'])
+        $form->addPassword('password_repeat', 'Repeat password')
+            ->addRule(Form::EQUAL, 'Passwords does not match.', $form['password'])
             ->setRequired();
         $form->addSubmit('register', 'Sign up');
         $form->onSuccess[] = function (Form $form) use ($instructions) {

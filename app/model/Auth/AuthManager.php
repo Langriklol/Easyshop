@@ -1,6 +1,9 @@
 <?php
 
-use App\Model\BaseManager;
+namespace App\Model;
+
+use Nette\Database\Context;
+use Nette\Database\UniqueConstraintViolationException;
 use Nette\Security\AuthenticationException;
 use Nette\Security\IAuthenticator;
 use Nette\Security\Identity;
@@ -19,9 +22,15 @@ class AuthManager extends BaseManager implements IAuthenticator
     const
         TABLE_NAME = 'user',
         COLUMN_ID = 'user_id',
-        COLUMN_NAME = 'username',
+        COLUMN_EMAIL = 'email',
+        COLUMN_NAME = 'name',
         COLUMN_PASSWORD_HASH = 'password',
         COLUMN_ROLE = 'role';
+
+    public function __construct(Context $context)
+    {
+        parent::__construct($context);
+    }
 
     /**
      * Performs an authentication against e.g. database.
@@ -32,10 +41,10 @@ class AuthManager extends BaseManager implements IAuthenticator
      */
     function authenticate(array $credentials)
     {
-        list($username, $password) = $credentials; // Parameter extract
+        list($email, $password) = $credentials; // Parameter extract
 
         // Returns user or false
-        $user = $this->database->table(self::TABLE_NAME)->where(self::COLUMN_NAME, $username)->fetch();
+        $user = $this->db->table(self::TABLE_NAME)->where(self::COLUMN_EMAIL, $email)->fetch();
 
         // User check
         if (!$user) {
@@ -55,5 +64,34 @@ class AuthManager extends BaseManager implements IAuthenticator
 
         // Returns user identity
         return new Identity($user[self::COLUMN_ID], $user[self::COLUMN_ROLE], $userData);
+    }
+
+    /**
+     * @param $email
+     * @param $password
+     * @throws DuplicateNameException
+     */
+    public function register($email, $password)
+    {
+        try {
+            $name = 'user_' . time();
+            $this->db->table(self::TABLE_NAME)->insert(array(
+                self::COLUMN_EMAIL => $email,
+                self::COLUMN_NAME => $name,
+                self::COLUMN_PASSWORD_HASH => Passwords::hash($password),
+            ));
+        } catch (UniqueConstraintViolationException $e) {
+            // Throw exception if user already exists
+            throw new DuplicateNameException;
+        }
+    }
+}
+
+class DuplicateNameException extends \Exception
+{
+    public function __construct()
+    {
+        parent::__construct();
+        $this->message = 'User with this name already exists';
     }
 }

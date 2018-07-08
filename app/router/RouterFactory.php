@@ -17,8 +17,21 @@ class RouterFactory
 	public static function createRouter()
 	{
 		$router = new RouteList;
-		//$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
-		//$router[] = new Route('<presenter>/[<category>]/[<name>]-[<id>]', 'Core:Product:default');
+
+		$router[] = new Route('auth/<action>', [
+		   'presenter' => 'Core:Auth',
+            'action' => [
+                Route::VALUE => 'login',
+                Route::FILTER_TABLE => [
+                    'default' => 'default',
+                    'login' => 'login',
+                    'register' => 'register',
+                    'logout' => 'logout'
+                ],
+                Route::FILTER_STRICT => true
+            ]
+        ]);
+
         $router[] = new Route('product/add', 'Core:Product:add');
         $router[] = new Route('product/[<id>]/<action>', [
             'presenter' => 'Core:Product',
@@ -33,15 +46,14 @@ class RouterFactory
             ]
         ]);
 
-        $router[] = new Route('products', 'Core:Product:list');
-        $router[] = new Route('<presenter>/<action>[/<id>]', 'Core:Product:list');
-
         $router[] = new Route('basket/<action>/[<id>]', [
             'presenter' => 'Core:Basket',
             'action' => [
                 Route::VALUE => 'default',
                 Route::FILTER_TABLE => [
                     'default' => 'default',
+                    'order' => 'order',
+                    'list' => 'list'
                 ],
             ]
         ]);
@@ -60,6 +72,9 @@ class RouterFactory
                 Route::FILTER_STRICT => true
             ]
         ]);
+
+        $router[] = new Route('products', 'Core:Product:list');
+        $router[] = new Route('', 'Core:Product:list');
 
         return $router;
 	}

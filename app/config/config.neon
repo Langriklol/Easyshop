@@ -1,8 +1,20 @@
 parameters:
+    #Roles
+    guest: guest
+    member: member
+    admin: admin
+    error: Error
 
+security:
+    roles:
+        guest:
+        member: [guest]
+        admin:
 
 application:
-	errorPresenter: Error
+	errorPresenter: %error%
+	catchExceptions: false #true for production server
+	#catchExceptions: true
 	mapping:
 	    Admin: App\AdminModule\*Presenter
 	    *: App\*Module\Presenters\*Presenter
@@ -30,8 +42,11 @@ database:
 	       debugger: true
 
 services:
-	router: App\RouterFactory::createRouter
+	router: App\RouterFactory::createRouter #Router settings
+	authenticator: App\Model\AuthManager #AuthManager settings
 	- App\CoreModule\Model\Shop\Basket
+	- App\Forms\UserFormFactory
+	- App\Forms\AdministrationFormFactory
 
 includes:
         - ../CoreModule/config/config.neon

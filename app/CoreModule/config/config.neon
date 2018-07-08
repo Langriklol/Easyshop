@@ -2,10 +2,32 @@ parameters:
     product: Core:Product
     order: Core:Order
     invoice: Core:Invoice
-
+    basket: Core:Basket
+    auth: Core:Auth
+    error: Core:Error
 services:
+    security.authorizator:
+        setup:
+            - addResource(%auth%)
+            - addResource(%product%)
+            - addResource(%invoice%)
+            - addResource(%basket%)
+            - addResource(%order%)
+            - addResource(%error%)
+            # Guest
+            - allow(%guest%, %error%)
+            - allow(%guest%, %auth%, 'login')
+            - allow(%guest%, %auth%, 'register')
+            - allow(%guest%, %product%, 'default')
+            - allow(%guest%, %product%, 'list')
+            - allow(%guest%, %basket%, 'add')
+            - allow(%guest%, %basket%, 'remove')
+            # Member
+            - allow(%member%, %auth%, 'default')
+            - allow(%member%, %auth%, 'logout')
+            - allow(%member%, %basket%, 'order')
+    # Services
     - App\CoreModule\Model\Shop\ProductManager
     - App\CoreModule\Model\Shop\ProductFactory
     - App\CoreModule\Model\Shop\Order\OrderManager
     - Langriklol\Utils\ProductSortHelper
-    - App\Forms\AdministrationFormFactory

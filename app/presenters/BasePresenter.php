@@ -23,7 +23,12 @@ abstract class BasePresenter extends Presenter
    */
    protected $basket;
 
-   public function startup()
+   protected $loginPresenter = ':Core:Auth:login';
+
+    /**
+     * @throws Nette\Application\AbortException
+     */
+    public function startup()
    {
        parent::startup();
        $this->session = $this->getSession('basket');
@@ -31,6 +36,12 @@ abstract class BasePresenter extends Presenter
        $this->basket = &$this->session->basket;
        $this->template->basketItemCount = count($this->basket->getProducts());
        bdump($this->basket, 'Basket');
+       bdump($this->user->getIdentity(), 'User');
+       if (!$this->getUser()->isAllowed($this->getName(), $this->getAction())) {
+           $this->flashMessage('You are not logged in or have not permission to do this.');
+           if ($this->loginPresenter)
+               $this->redirect($this->loginPresenter);
+       }
    }
 
 }

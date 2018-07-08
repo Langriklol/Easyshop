@@ -84,6 +84,6 @@ class Basket
      */
     public function renderProductFrontend(): ArrayHash
     {
-        $this->sortHelper->sortProductFrontEnd($this->products);
+        return $this->sortHelper->sortProductFrontEnd($this->products);
     }
 }
