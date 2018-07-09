@@ -77,7 +77,7 @@ class OrderManager extends BaseManager
             'products' => $productArray,
             'description' => $description,
             'status' => $status,
-            'orderType' => $orderType
+            'order_type' => $orderType
         ];
 
         return $this->db->table(Order::TABLE)->insert($order);

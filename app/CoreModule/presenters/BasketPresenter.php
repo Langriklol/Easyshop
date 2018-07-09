@@ -50,9 +50,9 @@ class BasketPresenter extends BasePresenter
     /**
      * @throws Nette\Application\AbortException
      */
-    public function actionOrder()
+    public function handleOrder()
     {
-        $this->redirect('Order:default');
+        $this->redirect(':Core:Order:newOrder');
     }
     
     /**

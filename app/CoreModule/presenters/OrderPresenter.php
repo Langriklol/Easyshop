@@ -10,7 +10,9 @@ namespace App\CoreModule\Presenters;
 
 use App\CoreModule\Model\Shop\Order\Order;
 use App\CoreModule\Model\Shop\Order\OrderManager;
+use App\Forms\AdministrationFormFactory;
 use App\Presenters\BasePresenter;
+use Nette\Application\UI\Form;
 use Nette\Utils\ArrayHash;
 
 class OrderPresenter extends BasePresenter
@@ -19,11 +21,14 @@ class OrderPresenter extends BasePresenter
      * @var OrderManager
      */
     private $orderManager;
+    /** @var AdministrationFormFactory */
+    private $formFactory;
 
-    public function __construct(OrderManager $orderManager)
+    public function __construct(OrderManager $orderManager, AdministrationFormFactory $formFactory)
     {
         parent::__construct();
         $this->orderManager =  $orderManager;
+        $this->formFactory = $formFactory;
     }
 
     /**
@@ -39,17 +44,31 @@ class OrderPresenter extends BasePresenter
             $this->template->order = $order;
         }else{
             $this->flashMessage('Missing order id');
-            $this->redirect('Product:list');
+            //$this->redirect('Product:list');
         }
     }
 
+    public function actionNewOrder()
+    {
+        $this->flashMessage('New order!');
+    }
+    
+    public function createComponentNewOrderForm(): Form
+    {
+        $form = $this->formFactory->createNewOrderForm();
+        $form->onSuccess[] = [$this, 'makeOrder'];
+        return $form;
+    }
+    
     public function renderList()
     {
         $this->template->orders = $this->orderManager->getOrders();
     }
 
-    public function actionMake($description, $name)
+    public function makeOrder(Form $form, $values)
     {
-        $this->orderManager->makeOrder((int)$this->user-getId(), $this->basket->getProducts(), Order::PENDING_STATUS, Order::TYPE_CASH_ON_DELIVERY, $description, $name);
+        $description = $values->description;
+        $name = $values->name;
+        $this->orderManager->makeOrder($this->user->getId(), $this->basket->getProducts(), Order::PENDING_STATUS, Order::TYPE_CASH_ON_DELIVERY, $description, $name);
     }
 }

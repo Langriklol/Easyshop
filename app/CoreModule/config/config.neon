@@ -22,10 +22,13 @@ services:
             - allow(%guest%, %product%, 'list')
             - allow(%guest%, %basket%, 'add')
             - allow(%guest%, %basket%, 'remove')
+            - allow(%guest%, %basket%, 'default')
             # Member
             - allow(%member%, %auth%, 'default')
             - allow(%member%, %auth%, 'logout')
             - allow(%member%, %basket%, 'order')
+            - allow(%member%, %order%, 'default')
+            - allow(%member%, %order%, 'new')
     # Services
     - App\CoreModule\Model\Shop\ProductManager
     - App\CoreModule\Model\Shop\ProductFactory

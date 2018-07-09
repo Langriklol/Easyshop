@@ -90,9 +90,11 @@ class AdministrationFormFactory
             Order::TYPE_CASH_ON_DELIVERY => 'Cash on delivery',
             Order::TYPE_PAID => 'Payment in advance'
         ]);
-        $form['country']->setDefaultValue(Order::TYPE_CASH_ON_DELIVERY);
+        $form['delivery']->setDefaultValue(Order::TYPE_CASH_ON_DELIVERY);
         $form->addText('description', 'Description')
-            ->addRule(Form::MAX_LENGTH, 'Description length must be less or equal 255 characters', 255);
+            ->addRule(Form::MAX_LENGTH, 'Description length must be less or equal 255 characters', 255)
+            ->setRequired(false);
+        $form->addSubmit('Order');
         return $form;
     }
 }
