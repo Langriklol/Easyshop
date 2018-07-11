@@ -48,5 +48,14 @@ services:
 	- App\Forms\UserFormFactory
 	- App\Forms\AdministrationFormFactory
 
+extensions:
+    gopay: Markette\GopayInline\Bridges\Nette\DI\GopayExtension
+
+gopay:
+    goId:
+    clientId:
+    clientSecret:
+    test: on # / off
+
 includes:
         - ../CoreModule/config/config.neon

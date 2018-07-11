@@ -22,6 +22,7 @@ class ComposerStaticInit0f212645cfc93e28d34c7dc8d0b4bd60
         'M' => 
         array (
             'Mpdf\\' => 5,
+            'Markette\\GopayInline\\' => 21,
         ),
         'D' => 
         array (
@@ -37,6 +38,10 @@ class ComposerStaticInit0f212645cfc93e28d34c7dc8d0b4bd60
         'Mpdf\\' => 
         array (
             0 => __DIR__ . '/..' . '/mpdf/mpdf/src',
+        ),
+        'Markette\\GopayInline\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/markette/gopay-inline/src',
         ),
         'DeepCopy\\' => 
         array (
