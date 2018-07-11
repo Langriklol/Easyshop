@@ -8,12 +8,13 @@
 
 namespace App\CoreModule\Presenters;
 
+use App\CoreModule\model\Shop\Invoice\InvoiceManager;
 use App\CoreModule\Model\Shop\Order\Order;
 use App\CoreModule\Model\Shop\Order\OrderManager;
 use App\Forms\AdministrationFormFactory;
 use App\Presenters\BasePresenter;
 use Nette\Application\UI\Form;
-use Nette\Utils\ArrayHash;
+use Nette\Database\Context;
 
 class OrderPresenter extends BasePresenter
 {
@@ -21,14 +22,17 @@ class OrderPresenter extends BasePresenter
      * @var OrderManager
      */
     private $orderManager;
+    /** @var Context */
+    private $context;
     /** @var AdministrationFormFactory */
     private $formFactory;
 
-    public function __construct(OrderManager $orderManager, AdministrationFormFactory $formFactory)
+    public function __construct(Context $context, OrderManager $orderManager,  AdministrationFormFactory $formFactory)
     {
         parent::__construct();
         $this->orderManager =  $orderManager;
         $this->formFactory = $formFactory;
+        $this->context = $context;
     }
 
     /**
@@ -44,7 +48,7 @@ class OrderPresenter extends BasePresenter
             $this->template->order = $order;
         }else{
             $this->flashMessage('Missing order id');
-            //$this->redirect('Product:list');
+            $this->redirect('Product:list');
         }
     }
 
@@ -65,10 +69,23 @@ class OrderPresenter extends BasePresenter
         $this->template->orders = $this->orderManager->getOrders();
     }
 
+    /**
+     * @param Form $form
+     * @param $values
+     * @throws \Mpdf\MpdfException
+     */
     public function makeOrder(Form $form, $values)
     {
         $description = $values->description;
-        $name = $values->name;
-        $this->orderManager->makeOrder($this->user->getId(), $this->basket->getProducts(), Order::PENDING_STATUS, Order::TYPE_CASH_ON_DELIVERY, $description, $name);
+        $name = 'Order ' . $this->user->getId() . '_' . time();
+        $orderId = $this->orderManager->makeOrder($this->user->getId(), $this->basket->getProducts(), Order::PENDING_STATUS, $values->delivery, $description, $name);
+        $orderId = $orderId->id;
+        bdump($orderId, 'orderId');
+
+        $order = $this->orderManager->getOrder($orderId);
+        $order->setProducts($this->orderManager->renderOrderProductFrontEnd($order));
+
+        $invoiceManager = new InvoiceManager($this->context, $order);
+        $invoiceManager->makeInvoice()->makeTemplate()->export();
     }
 }

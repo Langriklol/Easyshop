@@ -36,9 +36,6 @@ abstract class BasePresenter extends Presenter
        $this->template->basketItemCount = count($this->basket->getProducts());
 
        bdump($this->basket, 'Basket');
-       bdump($this->user->getIdentity(), 'User');
-
-       bdump($this->getUser()->getId());
 
        if (!$this->getUser()->isAllowed($this->getName(), $this->getAction()) && !$this->getUser()->getIdentity()) {
            $this->flashMessage('You are not logged in or have not permission to do this.');

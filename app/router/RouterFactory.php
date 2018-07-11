@@ -74,6 +74,19 @@ class RouterFactory
             ]
         ]);
 
+        $router[] = new Route('user[/<id>]', 'Core:User:default');
+        $router[] = new Route('user/<action>[/<id>]', [
+            'presenter' => 'Core:User',
+            'action' => [
+                Route::VALUE => 'list',
+                Route::FILTER_TABLE => [
+                    'list' => 'list',
+                    'me' => 'default'
+                ],
+                Route::FILTER_STRICT => true
+            ]
+        ]);
+
         $router[] = new Route('products', 'Core:Product:list');
         $router[] = new Route('', 'Core:Product:list');
 

@@ -85,7 +85,6 @@ class AdministrationFormFactory
     public function createNewOrderForm(): Form
     {
         $form = new Form();
-        $form->addText('name', 'Order name');
         $form->addSelect('delivery', 'Delivery', [
             Order::TYPE_CASH_ON_DELIVERY => 'Cash on delivery',
             Order::TYPE_PAID => 'Payment in advance'

@@ -64,12 +64,7 @@ class OrderManager extends BaseManager
 
     public function makeOrder(int $user, array $products, string $status, string $orderType, string $description, string $name = null)
     {
-        $productArray = '';
-
-        foreach ($products as $product)
-        {
-            $productArray = $product ? ',' . $product->id : $product->id;
-        }
+        $productArray = $this->storeProducts($products);
 
         $order = [
             'name' => $name,
@@ -106,8 +101,17 @@ class OrderManager extends BaseManager
         return $this->sortHelper->sortProductFrontEnd($order->products);
     }
 
-    public function storeProducts(array $products)
+    public function storeProducts(array $products): string
     {
-        
+        $productArray = '';
+
+        foreach ($products as $product)
+        {
+            if($productArray == '')
+                $productArray = (string) $product->id;
+            else
+                $productArray .= ',' . $product->id;
+        }
+        return $productArray;
     }
 }
