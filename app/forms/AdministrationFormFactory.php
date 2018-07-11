@@ -32,7 +32,7 @@ class AdministrationFormFactory
     public function productFormSucceeded(Form $form, $values)
     {
         $image = $values->image;
-        $imagePath = './pics/product/' . $image->getName();
+        $imagePath = './pics/Product/' . $image->getName();
         $image->move($imagePath);
         $product = $this->productManager->createProduct(
             null,

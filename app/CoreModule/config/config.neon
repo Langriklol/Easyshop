@@ -5,6 +5,7 @@ parameters:
     basket: Core:Basket
     auth: Core:Auth
     error: Core:Error
+    user: Core:User
 services:
     security.authorizator:
         setup:
@@ -29,6 +30,7 @@ services:
             - allow(%member%, %basket%, 'order')
             - allow(%member%, %order%, 'default')
             - allow(%member%, %order%, 'new')
+            - allow(%member%, %user%, %me%)
     # Services
     - App\CoreModule\Model\Shop\ProductManager
     - App\CoreModule\Model\Shop\ProductFactory
