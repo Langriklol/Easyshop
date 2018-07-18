@@ -9,7 +9,15 @@
 namespace App\CoreModule\Model\Shop;
 
 
+use Nette\Security\Identity;
+
 class Payment
 {
+    /** @var Identity */
+    private $identity;
 
+    public function __construct(Identity $identity)
+    {
+        $this->identity = $identity;
+    }
 }
