@@ -1,3 +1,6 @@
+includes:
+        - ../CoreModule/config/config.neon
+
 parameters:
     #Roles
     guest: guest
@@ -48,14 +51,11 @@ services:
 	- App\Forms\UserFormFactory
 	- App\Forms\AdministrationFormFactory
 
-extensions:
-    gopay: Markette\GopayInline\Bridges\Nette\DI\GopayExtension
-
 gopay:
-    goId:
-    clientId:
-    clientSecret:
+    goId: ''
+    clientId: ''
+    clientSecret: ''
     test: on # / off
 
-includes:
-        - ../CoreModule/config/config.neon
+extensions:
+    gopay: Markette\GopayInline\Bridges\Nette\DI\GopayExtension

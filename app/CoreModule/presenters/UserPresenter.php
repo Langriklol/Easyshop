@@ -30,17 +30,21 @@ class UserPresenter extends BasePresenter
 
     /**
      * @throws \Nette\Application\AbortException
+     * @throws \Nette\Application\BadRequestException
      */
     public function startup()
     {
         parent::startup();
         $id = (int) $this->presenter->getParameter('id');
-        if($id && (int) $this->user->getId() !== $id)
+        if(($id && (int) $this->user->getId() !== $id) || $this->getUser()->isInRole('admin') == false)
         {
-            $this->flashMessage('You are not allowed to do this');
-            $this->redirect('Product:list');
-        }elseif (!$id) {
+            $this->error('You are not allowed to do this');
+            //$this->redirect('Product:list');
+
+        }elseif (!$id && $this->getUser()->isInRole('admin') == false) {
             $this->redirect('Auth:login');
+        }else{
+            $this->terminate();
         }
     }
 
