@@ -2,6 +2,7 @@
 
 namespace App\Forms;
 
+use App\Model\DuplicateNameException;
 use Nette\Application\UI\Form;
 use Nette\Security\AuthenticationException;
 use Nette\Security\User;
@@ -102,7 +103,11 @@ class UserFormFactory
             ->setRequired();
         $form->addSubmit('register', 'Sign up');
         $form->onSuccess[] = function (Form $form) use ($instructions) {
-            $this->login($form, $instructions, true);
+            try {
+                $this->login($form, $instructions, true);
+            }catch(DuplicateNameException $e){
+                $form->addError($e->getMessage());
+            }
         };
         return $form;
     }

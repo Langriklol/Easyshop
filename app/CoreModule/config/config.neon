@@ -15,6 +15,7 @@ services:
             - addResource(%basket%)
             - addResource(%order%)
             - addResource(%error%)
+            - addResource(%user%)
             # Guest
             - allow(%guest%, %error%)
             - allow(%guest%, %auth%, 'login')
@@ -30,7 +31,9 @@ services:
             - allow(%member%, %basket%, 'order')
             - allow(%member%, %order%, 'default')
             - allow(%member%, %order%, 'new')
-            - allow(%member%, %user%, %me%)
+            - allow(%member%, %user%, 'me')
+            #admin
+            - allow(%admin%)
     # Services
     - App\CoreModule\Model\Shop\ProductManager
     - App\CoreModule\Model\Shop\ProductFactory
