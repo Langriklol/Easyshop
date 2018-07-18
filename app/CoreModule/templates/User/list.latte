@@ -1,0 +1,26 @@
+<table>
+    <thead>
+        <tr>
+            <td>User id</td>
+            <td>User name</td>
+            <td>User email</td>
+            <td>User residence</td>
+            <td>User phone</td>
+            <td>User ico</td>
+            <td>User role</td>
+        </tr>
+    </thead>
+    <tbody>
+        {foreach $users as $user}
+            <tr>
+                <td>{$user->id}</td>
+                <td>{$user->name}</td>
+                <td>{$user->email}</td>
+                <td>{$user->residence}</td>
+                <td>{$user->phone}</td>
+                <td>{if $user->ico} {$user->ico} {/if}</td>
+                <td>{$user->role}</td>
+            </tr>
+        {/foreach}
+    </tbody>
+</table>
