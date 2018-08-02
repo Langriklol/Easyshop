@@ -1,2 +1,16 @@
 <h1>{$user->name}</h1>
+<table>
+    <tr>
+        <td>Email </td><td>{$user->email}</td><td><a n:if="$user->user_id == $identityId">edit</a></td>
+    </tr>
+    <tr>
+        <td>Residence </td><td>{$user->residence}</td>
+    </tr>
+    <tr>
+        <td>Phone number </td><td>{$user->phone}</td>
+    </tr>
+    <tr>
+        <td>ICO </td><td>{$user->ico}</td>
+    </tr>
+</table>
 {include '../Order/list.latte' orders => $orders}

@@ -24,6 +24,7 @@ class UserPresenter extends BasePresenter
     /**
      * UserPresenter constructor.
      * @param Context $context
+     * @param OrderManager $orderManager
      */
     public function __construct(Context $context, OrderManager $orderManager)
     {
@@ -61,7 +62,7 @@ class UserPresenter extends BasePresenter
         if($id){
 
             $user = $this->context->table('user')->select('user_id, email, name, picture, residence, phone, ico')->where('user_id', $id)->get($id);
-            bdump($user);
+            bdump($user, 'User db');
             $orders = $user->related('order.user');
 
             $orderArray = [];
@@ -80,8 +81,23 @@ class UserPresenter extends BasePresenter
 
             $this->template->user = $user;
             $this->template->orders = $orderArray;
+            $this->template->identityId = $this->getUser()->getId();
         }else{
             $this->redirect('User:list');
+        }
+    }
+
+    /**
+     * @param string $key
+     * @param $value
+     * @throws \Nette\Application\BadRequestException
+     */
+    public function handleUpdate(string $key, $value)
+    {
+        try{
+            $this->context->table('user')->where('user_id')->update([$key => $value]);
+        }catch (\PDOException $e){
+            $this->error($e->getMessage());
         }
     }
 
@@ -90,6 +106,6 @@ class UserPresenter extends BasePresenter
      */
     public function actionList()
     {
-        $this->template->users = $this->context->table('user')->select('email, name, picture, residence, phone, ico')->fetchAll();
+        $this->template->users = $this->context->table('user')->select('user_id, email, name, picture, residence, phone, ico, role')->fetchAll();
     }
 }

@@ -109,6 +109,7 @@ class UserFormFactory
                 $form->addError($e->getMessage());
             }
         };
+        $form->onError[] = ["Bad email or password"];
         return $form;
     }
 }

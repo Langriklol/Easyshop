@@ -3,17 +3,32 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
+	{block css}
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+	{/block}
 
 	<title>{ifset title}{include title|stripHtml} | {/ifset}Nette Web</title>
+	{block head}{/block}
 </head>
 
 <body>
 	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
-	
-	{include content}
 
 	{block scripts}
-	<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+		<script src="https://nette.github.io/resources/js/netteForms.min.js"></script>
+		<script src="{$basePath}/js/userEdit.js"></script>
+		<script src="{$basePath}/js/bootstrap.min.js"></script>
+		<script src="{$basePath}/js/bootbox.min.js"></script>
+		<script>
+            $(document).on("click", ".alert", function(e) {
+                bootbox.alert("Hello world!", function() {
+                    console.log("Alert Callback");
+                });
+            });
+		</script>
 	{/block}
+
+	{include content}
 </body>
 </html>
